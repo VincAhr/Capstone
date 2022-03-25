@@ -20,3 +20,4 @@ The frontend project is built using the `com.github.eirslett:frontend-maven-plug
 
 Just connect your heroku app and yout GitHub repository on the heroku app's "Deploy"-tab.
 # Capstone
+# Capstone
