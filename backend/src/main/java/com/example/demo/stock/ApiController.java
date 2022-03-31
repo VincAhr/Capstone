@@ -5,7 +5,7 @@ import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/stocks")
+@RequestMapping("/api/stock")
 @Data
 public class ApiController {
 
