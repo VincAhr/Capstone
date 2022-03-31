@@ -1,4 +1,3 @@
-import {StockItem} from "./StockModel";
 
 
 export const searchStock = (symbol : string) => {

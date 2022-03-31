@@ -8,7 +8,6 @@ export default function SearchBar() {
 
     const [stock, setStock] = useState("")
     const [info, setInfo] = useState("")
-    const [price, setPrice] = useState("")
 
 
     useEffect(() => {
@@ -36,7 +35,7 @@ export default function SearchBar() {
             </Link>
 
             <ul>
-                <span>{info}</span> <span>{price}</span>
+                <span>{info}</span>
             </ul>
         </div>
     )
