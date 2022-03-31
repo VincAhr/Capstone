@@ -30,7 +30,7 @@ export default function SearchBar() {
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className="button-search" type="submit"> search</button>
             </form>
-            <button className="button-add">add stock</button>
+            <button className="button-add" type="button" >add stock</button>
             <Link to={"/DepotPage"}>
                 <button className="button-depot" type={"button"}> Depot anzeigen</button>
             </Link>
