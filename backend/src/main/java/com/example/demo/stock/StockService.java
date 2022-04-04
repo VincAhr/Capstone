@@ -1,6 +1,7 @@
 package com.example.demo.stock;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -10,14 +11,11 @@ import java.util.Objects;
 
 
 @Service
+@RequiredArgsConstructor
 public class StockService {
 
     @Value("${marketstack_pasword}") String pw;
     private final StockRepository stockRepository;
-
-    public StockService(StockRepository stockRepository) {
-        this.stockRepository = stockRepository;
-    }
 
     public StockData searchStock (String stockName) {
 
@@ -30,7 +28,6 @@ public class StockService {
 
 
     public StockData addStock(StockData newStock) {
-        StockData saved = stockRepository.save(newStock);
-        return saved;
+        return stockRepository.save(newStock);
     }
 }

@@ -2,7 +2,6 @@ package com.example.demo.user;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +23,7 @@ public class MongoUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userService.findByUsername(username)
                 .map(user -> new User(user.getUsername(), user.getPassword(), List.of()))
-                .orElseThrow(() -> new UsernameNotFoundException(username + " not found"));
+                .orElseThrow(() -> new UsernameNotFoundException(username + " nicht vergeben"));
     }
 
 

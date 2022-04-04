@@ -1,9 +1,10 @@
 package com.example.demo.stock;
 
 
+import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@lombok.Data
+@Data
 @Document(collection = "stocks")
 public class StockData {
 
