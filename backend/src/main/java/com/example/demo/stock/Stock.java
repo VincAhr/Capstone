@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 public class Stock {
 
-    private List<Stockdata> data = new ArrayList<>();
+    private List<StockData> data = new ArrayList<>();
 
 }

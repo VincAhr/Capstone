@@ -13,8 +13,13 @@ import java.util.Objects;
 public class StockService {
 
     @Value("${marketstack_pasword}") String pw;
+    private final StockRepository stockRepository;
 
-    public Stockdata searchStock (String stockName) {
+    public StockService(StockRepository stockRepository) {
+        this.stockRepository = stockRepository;
+    }
+
+    public StockData searchStock (String stockName) {
 
         String url =  "http://api.marketstack.com/v1/eod?access_key="+pw+"&limit=14&symbols="+stockName;
 
@@ -24,6 +29,8 @@ public class StockService {
     }
 
 
-
-
+    public StockData addStock(StockData newStock) {
+        StockData saved = stockRepository.save(newStock);
+        return saved;
+    }
 }
