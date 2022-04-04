@@ -1,6 +1,6 @@
-# spring-boot-react-bundle
+# CapStock
 
-This is a demo project that shows how it is possible to deploy a react frontend and a Spring Boot backend into a heroku dyno. The following paragraphs describe the actions you need to perform.
+This is a project that shows how it is possible to deploy a react frontend and a Spring Boot backend into a heroku dyno. The following paragraphs describe the actions you need to perform.
 
 ## Creating an heroku app
 When creating the heroku app I recommend to use the heroku cli. Use the following commands to create the app and add the required buildpack.
@@ -16,7 +16,5 @@ To let heroku know that the jar file is now in the target directory of the backe
 
 The frontend project is built using the `com.github.eirslett:frontend-maven-plugin`. The `maven-resources-plugin` is used to copy the content of the resulting `build` directory to the backend's `target/classes/static` directory.<br />
 
-## Deployment to heroku
 
-Just connect your heroku app and your GitHub repository on the heroku app's "Deploy"-tab.
 # Capstone

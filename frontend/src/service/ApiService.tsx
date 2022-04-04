@@ -1,5 +1,4 @@
 
-
 export const searchStock = (symbol : string) => {
     return fetch(`/api/stock/${symbol}`,{
         method: 'GET',
@@ -16,3 +15,15 @@ export const searchStock = (symbol : string) => {
         })
 }
 
+export const postNewStock = (symbol: string, close: string) => {
+    return fetch('/api/stock', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'symbol': symbol, 'close': close})
+
+    })
+        .then(response => response.json())
+        .catch(e => console.log(e.message))
+}
