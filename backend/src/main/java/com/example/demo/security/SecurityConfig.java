@@ -41,10 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/users", "/api/users/login").permitAll()
+                .mvcMatchers(HttpMethod.POST, "/api/user", "/api/user/login").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/api/greeting").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/index*", "/static/**", "/*.js", "/*.json", "/*.ico","/*.png").permitAll()
-                .antMatchers(HttpMethod.GET, "/").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/api/**").authenticated()
                 .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {searchStock} from "../service/ApiService";
 import {Link} from "react-router-dom";
 import {postNewStock} from "../service/ApiService";
+import {useAuth} from "../auth/AuthProvider";
 
 
 
@@ -10,6 +11,7 @@ export default function SearchBar() {
     const [stock, setStock] = useState("")
     const [info, setInfo] = useState("")
     const [price, setPrice] = useState("")
+    const {token} = useAuth()
 
 
     useEffect(() => {
@@ -19,14 +21,14 @@ export default function SearchBar() {
 
     const getStock = (ev : React.FormEvent) => {
         ev.preventDefault()
-        searchStock(stock)
+        searchStock(stock, token)
             .then(r => { setInfo(r.symbol);setPrice(r.close);
             })
     }
 
     const postStock = (ev : React.FormEvent) => {
         ev.preventDefault()
-        postNewStock(info, price)
+        postNewStock(info, price, token)
             .then(() => {
                 setPrice('')
                 setInfo('')

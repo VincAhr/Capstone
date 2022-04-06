@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReactController {
 
     @RequestMapping(value = "/**/{[path:[^\\.]*}")
-    public String forwardToRouteUrl() {
+    public String forwardToRuoteUrl() {
         return "forward:/";
     }
 }
