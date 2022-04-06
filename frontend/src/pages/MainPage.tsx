@@ -5,6 +5,7 @@ import StockInfo from "../components/StockInfo";
 
 export default function MainPage(){
 
+
     return(
         <div className={'main'}>
             <Header/>
