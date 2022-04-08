@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/stock")
 @RequiredArgsConstructor
-public class ApiController {
+public class StockController {
 
     private final StockService stockservice;
 
