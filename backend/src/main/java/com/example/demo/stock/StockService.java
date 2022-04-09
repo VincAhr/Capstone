@@ -14,7 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class StockService {
 
-    @Value("${marketstack_pasword}") String pw;
+    @Value("${MARKETSTACK_PASSWORD}") String pw;
     private final StockRepository stockRepository;
 
     public StockData searchStock (String stockName) {
