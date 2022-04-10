@@ -1,14 +1,14 @@
-package com.example.demo.stock;
+package de.ahrens.backend.stock;
 
 
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/stock")
-@RequiredArgsConstructor
-public class ApiController {
+@AllArgsConstructor
+public class StockController {
 
     private final StockService stockservice;
 

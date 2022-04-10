@@ -1,4 +1,4 @@
-package com.example.demo.stock;
+package de.ahrens.backend.stock;
 
 
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class StockService {
 
-    @Value("${MARKETSTACK_PASSWORD}") String pw;
+    @Value("${app.marketstack.password}") String pw;
     private final StockRepository stockRepository;
 
     public StockData searchStock (String stockName) {

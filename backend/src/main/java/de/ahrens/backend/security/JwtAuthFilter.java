@@ -1,4 +1,4 @@
-package com.example.demo.security;
+package de.ahrens.backend.security;
 
 
 import io.jsonwebtoken.*;

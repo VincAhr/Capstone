@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {searchStock} from "../service/ApiService";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {postNewStock} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
 
@@ -12,6 +12,7 @@ export default function SearchBar() {
     const [info, setInfo] = useState("")
     const [price, setPrice] = useState("")
     const {token} = useAuth()
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -48,6 +49,7 @@ export default function SearchBar() {
             </form>
             <Link to={"/DepotPage"}>
                 <button className="button-depot" type={"button"}> Depot anzeigen</button>
+                <button onClick={ () => { navigate("/DepotPage")}}> Depot anzeigen</button>
             </Link>
             <ul>
                 <span>{info}</span><span> {price}</span>

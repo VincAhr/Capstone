@@ -1,4 +1,4 @@
-package com.example.demo.user;
+package de.ahrens.backend.user;
 
 
 import lombok.RequiredArgsConstructor;

@@ -1,10 +1,10 @@
-package com.example.demo.user;
+package de.ahrens.backend.user;
 
-import com.example.demo.security.JwtService;
-import com.example.demo.user.model.LoginCreationData;
-import com.example.demo.user.model.LoginData;
-import com.example.demo.user.model.Token;
-import com.example.demo.user.model.User;
+import de.ahrens.backend.security.JwtService;
+import de.ahrens.backend.user.model.LoginCreationData;
+import de.ahrens.backend.user.model.LoginData;
+import de.ahrens.backend.user.model.Token;
+import de.ahrens.backend.user.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;

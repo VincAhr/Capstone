@@ -1,4 +1,4 @@
-package com.example.demo.user.model;
+package de.ahrens.backend.user.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

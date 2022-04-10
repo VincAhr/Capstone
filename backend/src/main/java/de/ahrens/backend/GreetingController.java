@@ -1,4 +1,4 @@
-package com.example.demo;
+package de.ahrens.backend;
 
 import java.util.Arrays;
 import java.util.List;

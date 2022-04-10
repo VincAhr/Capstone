@@ -1,4 +1,4 @@
-package com.example.demo.stock;
+package de.ahrens.backend.stock;
 
 
 import lombok.Data;
