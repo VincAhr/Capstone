@@ -33,14 +33,12 @@ public class AppControllerIT {
         assertThat(restTemplate.postForEntity("/api/user", registerUser, UserModel.class).getStatusCode()).isEqualTo(HttpStatus.OK);
 
         // login user
-        assertThat(restTemplate.postForEntity("/api/user/login", loginUser, LoginData.class).getStatusCode()).isEqualTo(HttpStatus.OK);
-
+        ResponseEntity<Token> tokenResponseEntity = restTemplate.postForEntity("/api/user/login", loginUser, Token.class);
+        assertThat(tokenResponseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         // should add a stock
 
         //GIVEN
-        restTemplate.postForEntity("/api/user", registerUser, UserModel.class);
-        ResponseEntity<Token> tokenResponseEntity = restTemplate.postForEntity("/api/user/login", registerUser, Token.class);
         String token = tokenResponseEntity.getBody().getToken();
 
         //WHEN
