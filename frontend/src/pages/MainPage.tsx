@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import StockInfo from "../components/StockInfo";
+import StockList from "../components/StockList";
 
 
 export default function MainPage(){
@@ -11,6 +12,7 @@ export default function MainPage(){
             <Header/>
             <SearchBar/>
             <StockInfo/>
+            <StockList/>
         </ div>
     )
 }

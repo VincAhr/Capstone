@@ -2,7 +2,7 @@ package de.ahrens.backend.user;
 
 
 import de.ahrens.backend.user.model.LoginCreationData;
-import de.ahrens.backend.user.model.User;
+import de.ahrens.backend.user.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +14,15 @@ public class UserService {
 
  private final UserRepo userRepo;
 
-    public Optional<User> findByUsername(String username) {
+    public Optional<UserModel> findByUsername(String username) {
         return userRepo.findByUsername(username);
     }
 
-    public User createUser(LoginCreationData loginCreationData) {
+    public UserModel createUser(LoginCreationData loginCreationData) {
         if (findByUsername(loginCreationData.getUsername()).isPresent()){
             throw new IllegalArgumentException("Nutzername ist vergeben");
         }
-        User newUser = new User();
+        UserModel newUser = new UserModel();
         newUser.setUsername(loginCreationData.getUsername());
         newUser.setPassword(loginCreationData.getPassword());
         return userRepo.save(newUser);

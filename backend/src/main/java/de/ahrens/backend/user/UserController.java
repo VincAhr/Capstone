@@ -4,16 +4,13 @@ import de.ahrens.backend.security.JwtService;
 import de.ahrens.backend.user.model.LoginCreationData;
 import de.ahrens.backend.user.model.LoginData;
 import de.ahrens.backend.user.model.Token;
-import de.ahrens.backend.user.model.User;
+import de.ahrens.backend.user.model.UserModel;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
@@ -30,7 +27,7 @@ public class UserController {
 
 
     @PostMapping
-    public User postNewUser(@RequestBody LoginCreationData loginCreationData) {
+    public UserModel postNewUser(@RequestBody LoginCreationData loginCreationData) {
         if (!loginCreationData.getPassword().equals(loginCreationData.getPasswordAgain())) {
             throw new IllegalArgumentException("Passwörter müssen identisch sein, bitte wiederholen!");
         }
@@ -49,4 +46,5 @@ public class UserController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
         }
     }
+
 }

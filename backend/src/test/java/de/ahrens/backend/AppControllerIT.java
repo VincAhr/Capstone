@@ -3,33 +3,45 @@ package de.ahrens.backend;
 
 import de.ahrens.backend.stock.StockData;
 import de.ahrens.backend.user.model.LoginCreationData;
+import de.ahrens.backend.user.model.LoginData;
 import de.ahrens.backend.user.model.Token;
-import de.ahrens.backend.user.model.User;
+import de.ahrens.backend.user.model.UserModel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
+import org.springframework.test.context.TestPropertySource;
 
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class StockControllerIT {
+public class AppControllerIT {
 
     @Autowired
     private TestRestTemplate restTemplate;
 
-    private final LoginCreationData registeredUser = new LoginCreationData("1", "1", "1");
-    final private StockData stock = new StockData("AAPL");
+    private final LoginCreationData registerUser = new LoginCreationData("peter", "peter", "peter");
+    private final LoginData loginUser = new LoginData("peter", "peter");
+    private final StockData stock = new StockData("AAPL", "test");
 
     @Test
     void integrationTest() {
+
+        // register user
+        assertThat(restTemplate.postForEntity("/api/user", registerUser, UserModel.class).getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        // login user
+        assertThat(restTemplate.postForEntity("/api/user/login", loginUser, LoginData.class).getStatusCode()).isEqualTo(HttpStatus.OK);
+
+
         // should add a stock
 
         //GIVEN
-        restTemplate.postForEntity("/api/user", registeredUser, User.class);
-        ResponseEntity<Token> tokenResponseEntity = restTemplate.postForEntity("/api/user/login", registeredUser, Token.class);
+        restTemplate.postForEntity("/api/user", registerUser, UserModel.class);
+        ResponseEntity<Token> tokenResponseEntity = restTemplate.postForEntity("/api/user/login", registerUser, Token.class);
         String token = tokenResponseEntity.getBody().getToken();
 
         //WHEN

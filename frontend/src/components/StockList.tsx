@@ -8,10 +8,10 @@ export default function StockList () {
 
     return(
         <div>
-            <h2>Depot</h2>
-            <Link to={"/"}>
-                <button type={"button"}> Startseite </button>
-            </Link>
+            <h2>Depotlist</h2>
+            {/*<Link to={"/"}>*/}
+            {/*    <button type={"button"}> Startseite </button>*/}
+            {/*</Link>*/}
         </div>
     )
 }
