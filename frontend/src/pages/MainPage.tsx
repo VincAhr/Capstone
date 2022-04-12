@@ -1,17 +1,18 @@
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
-import StockInfo from "../components/StockInfo";
 import StockList from "../components/StockList";
+import NavBar from "../components/NavBar";
 
 
 export default function MainPage(){
 
 
+
     return(
         <div className={'main'}>
+            <NavBar/>
             <Header/>
             <SearchBar/>
-            <StockInfo/>
             <StockList/>
         </ div>
     )

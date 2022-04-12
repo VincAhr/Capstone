@@ -14,6 +14,7 @@ public class StockData {
 
     private String symbol;
     private String close;
+    private String user;
 
 
     public StockData(String symbol) {

@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -27,7 +29,12 @@ public class StockService {
     }
 
 
-    public StockData addStock(StockData newStock) {
+    public StockData addStock(StockData newStock, Principal principal) {
+        newStock.setUser(principal.getName());
         return stockRepository.save(newStock);
+    }
+
+    public List<StockData> getAllSaved(Principal principal) {
+        return stockRepository.findAllByUser(principal.getName());
     }
 }

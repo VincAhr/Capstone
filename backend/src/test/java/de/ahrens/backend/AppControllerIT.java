@@ -24,7 +24,7 @@ public class AppControllerIT {
 
     private final LoginCreationData registerUser = new LoginCreationData("peter", "peter", "peter");
     private final LoginData loginUser = new LoginData("peter", "peter");
-    private final StockData stock = new StockData("AAPL", "test");
+    private final StockData stock = new StockData("AAPL", "test", "user");
 
     @Test
     void integrationTest() {

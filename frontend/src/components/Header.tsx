@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 
+
 export default function Header(){
 
 
@@ -14,7 +15,7 @@ export default function Header(){
         })
             .then(response => response.text())
             .then(text => setGreeting(text))
-            .catch(err => setGreeting('Da ist etwas schief gelaufen'));
+            .catch(e => setGreeting('Da ist etwas schief gelaufen'));
     }, []);
 
 

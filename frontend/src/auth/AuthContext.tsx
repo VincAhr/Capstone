@@ -1,4 +1,4 @@
 import {createContext} from "react";
-import {AuthInterface} from "../model/UserModel";
+import {AuthInterface} from "./AuthInterface";
 
 export default createContext({} as AuthInterface)

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class GreetingController {
 
-    private List<String> greetings = Arrays.asList("Hallo", "Moin", "Servus");
+    private List<String> greetings = Arrays.asList("Hallo", "Moin");
 
     @GetMapping(path="/api/greeting", produces="text/plain")
     public String hello() {

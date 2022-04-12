@@ -17,6 +17,7 @@ export const searchStock = (symbol : string, token: string) => {
         })
 }
 
+
 export const postNewStock = (symbol: string, close: string, token: string) => {
     return fetch('/api/stock', {
         method: 'POST',
@@ -41,6 +42,7 @@ export const registerNewUser = ({username, password, passwordAgain} : RegisterDa
         body: JSON.stringify({'username':username, 'password':password, 'passwordAgain':passwordAgain})
     })
         .then(response => response.json())
+        .catch(e => console.log(e.message))
 }
 
 export const loginUser = ({username, password} : LoginData) =>{
@@ -52,4 +54,5 @@ export const loginUser = ({username, password} : LoginData) =>{
         body: JSON.stringify({'username':username, 'password':password})
     })
         .then(response => response.json())
+        .catch(e => console.log(e.message))
 }
