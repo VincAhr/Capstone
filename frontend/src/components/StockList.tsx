@@ -4,6 +4,7 @@ import {StockItem} from "../model/StockModel";
 import {deleteStock, getAllStocks, postShares,} from "../service/ApiService";
 
 
+
 export default function StockList () {
 
     const {token} = useAuth()
@@ -11,6 +12,7 @@ export default function StockList () {
     const [stocks, setStocks] = useState([] as Array<StockItem>)
     const [editShare,setEditShare] = useState("")
     const [editMode, setEditMode] = useState(false)
+
 
     useEffect(() => {
         getAllStocks(token)
@@ -42,7 +44,7 @@ export default function StockList () {
         }, token)
             .then(()=> {
             getAllStocks(token)
-                .then(response => (response))
+                .then(response => setStocks(response))
         setEditShare('')
         setEditMode(false)})
     }
@@ -57,10 +59,11 @@ export default function StockList () {
                 <h3>
                     {stocks.map(stocks =>
                         <div>
-                            name:   {stocks.symbol}
-                            price:  {stocks.close}
-                            date:   {stocks.date}
-                            shares: {stocks.shares}
+                            <p>name :   {stocks.symbol}</p>
+                            <p>price :  {stocks.close} $</p>
+                            <p>date :   {stocks.date}</p>
+                            <p>shares : {stocks.shares}</p>
+                            <p>value :  {stocks.close}*{stocks.shares}</p>
                             {
                                 editMode
                                     ?

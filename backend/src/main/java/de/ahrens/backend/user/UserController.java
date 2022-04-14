@@ -25,7 +25,6 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-
     @PostMapping
     public UserModel postNewUser(@RequestBody LoginCreationData loginCreationData) {
         if (!loginCreationData.getPassword().equals(loginCreationData.getPasswordAgain())) {

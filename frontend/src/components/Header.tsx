@@ -1,28 +1,29 @@
-import {useEffect, useState} from "react";
+// import {useEffect} from "react";
+// import {useAuth} from "../auth/AuthProvider";
 
 
-export default function Header(){
+export default function Header() {
 
 
-    const [greeting, setGreeting] = useState('')
+    // const {token} = useAuth()
+    //
+    // useEffect(() => {
+    //
+    // }, [])
+    //
+    // const parseJwt  = (token: string) => {
+    //     return (JSON.parse(window.atob(token.split('.')[1])))
+    // }
+    //
+    // const getUserName = () => {
+    //
+    //     parseJwt(token)
+    //
+    // }
 
-    useEffect(() => {
-        fetch('/api/greeting', {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/plain'
-            }
-        })
-            .then(response => response.text())
-            .then(text => setGreeting(text))
-            .catch(e => setGreeting('Da ist etwas schief gelaufen'));
-    }, []);
-
-
-
-    return(
+    return (
         <div className={'header'}>
-            <h2>{greeting}</h2>
+            <h2>Hallo</h2>
         </div>
-    )
+)
 }
