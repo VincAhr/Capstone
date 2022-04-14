@@ -1,6 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import MainPage from "./pages/MainPage";
-import DepotPage from "./pages/DepotPage";
 import LoginPage from "./pages/LoginPage";
 import AuthProvider from "./auth/AuthProvider";
 
@@ -13,7 +12,6 @@ function App() {
                     <Routes>
                         <Route path={'/'} element={<MainPage/>}/>
                         <Route path={'/login'} element={<LoginPage/>}/>
-                        <Route path={'/DepotPage'} element={<DepotPage/>}/>
                     </Routes>
                 </AuthProvider>
             </BrowserRouter>

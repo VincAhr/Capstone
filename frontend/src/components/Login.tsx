@@ -17,7 +17,6 @@ export default function Login(){
 
     const handleLogin = (event : FormEvent) => {
         event.preventDefault()
-        setError('')
         auth.login(loginUsername, loginPassword)
             .catch(e => setError(e.message))
     }
@@ -38,16 +37,16 @@ export default function Login(){
         <div className={'loginForm'}>
             <h3>Login</h3>
             <form onSubmit={handleLogin}>
-                <input type="text" placeholder={'Nutzername'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/>
-                <input type='password' placeholder={'Passwort'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/>
-                <button type={'submit'}>Login</button>
+                <input type="text" placeholder={'username'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/>
+                <input type='password' placeholder={'password'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/>
+                <button type={'submit'}>login</button>
             </form>
-            <h3>Register</h3>
+            <h3>Registration</h3>
             <form onSubmit={handleRegister}>
-                <input type="text" placeholder={'Nutzername'} value={registerUsername} onChange={ev => setRegisterUsername(ev.target.value)}/>
-                <input type='password' placeholder={'Passwort'} value={registerPasswordOne} onChange={ev => setRegisterPasswordOne(ev.target.value)}/>
-                <input type='password' placeholder={'Passwort wiederholen'} value={registerPasswordTwo} onChange={ev => setRegisterPasswordTwo(ev.target.value)}/>
-                <button type={'submit'}>Register</button>
+                <input type="text" placeholder={'username'} value={registerUsername} onChange={ev => setRegisterUsername(ev.target.value)}/>
+                <input type='password' placeholder={'password'} value={registerPasswordOne} onChange={ev => setRegisterPasswordOne(ev.target.value)}/>
+                <input type='password' placeholder={'password again'} value={registerPasswordTwo} onChange={ev => setRegisterPasswordTwo(ev.target.value)}/>
+                <button type={'submit'}>registration</button>
             </form>
             {error && <h2>{error}</h2>}
         </div>
