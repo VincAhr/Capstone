@@ -1,7 +1,32 @@
 import {LoginData, RegisterData} from "../model/UserModel";
+import {StockItem} from "../model/StockModel";
 
-export const searchStock = (symbol : string, token: string) => {
-    return fetch(`/api/stock/${symbol}`,{
+export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
+    return fetch(`/api/user`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': username, 'password': password, 'passwordAgain': passwordAgain})
+    })
+        .then(response => response.json())
+        .catch(e => console.log(e.message))
+}
+
+export const loginUser = ({username, password}: LoginData) => {
+    return fetch(`/api/user/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'username': username, 'password': password})
+    })
+        .then(response => response.json())
+        .catch(e => console.log(e.message))
+}
+
+export const searchStock = (symbol: string, token: string) => {
+    return fetch(`/api/stock/${symbol}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -9,20 +34,30 @@ export const searchStock = (symbol : string, token: string) => {
         }
     })
         .then(response => {
-            if (response.ok){
+            if (response.ok) {
                 return response.json()
             } else {
-                throw Error("Stock with the name "+symbol+" is not existing!")
+                throw Error("Stock with the name " + symbol + " is not existing!")
             }
         })
 }
 
+export const getAllStocks = (token: string) => {
+    return fetch('api/stock', {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    })
+        .then(response => response.json())
+}
 
 export const postNewStock = (symbol: string, close: string, token: string) => {
     return fetch('/api/stock', {
         method: 'POST',
         headers: {
-             Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
 
         },
@@ -33,25 +68,26 @@ export const postNewStock = (symbol: string, close: string, token: string) => {
         .catch(e => console.log(e.message))
 }
 
-export const registerNewUser = ({username, password, passwordAgain} : RegisterData) => {
-    return fetch(`/api/user`,{
-        method: 'POST',
+export const postShares = (stock: StockItem, token: string) => {
+    return fetch(`/api/stock/`, {
+        method: 'PUT',
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'username':username, 'password':password, 'passwordAgain':passwordAgain})
+        body: JSON.stringify(stock)
     })
         .then(response => response.json())
         .catch(e => console.log(e.message))
 }
 
-export const loginUser = ({username, password} : LoginData) =>{
-    return fetch(`/api/user/login`,{
-        method: 'POST',
+export const deleteStock = (id: string, token: string) => {
+    return fetch(`/api/stock/${id}`,{
+        method: 'DELETE',
         headers: {
+            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({'username':username, 'password':password})
+        }
     })
         .then(response => response.json())
         .catch(e => console.log(e.message))

@@ -30,6 +30,18 @@ public class StockController {
     public StockData postNewStock(@RequestBody StockData newStock, Principal principal){
        return stockservice.addStock(newStock, principal);
     }
+
+    @PutMapping
+    public StockData changeShares(@RequestBody StockData stock, Principal principal){
+        return stockservice.addShares(stock, principal);
+    }
+
+    @DeleteMapping("/{id}")
+    public StockData deleteToDoById(@PathVariable String id, Principal principal){
+        return stockservice.deleteStock(id, principal);
+    }
+
+
 }
 
 

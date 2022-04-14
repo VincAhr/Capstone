@@ -42,12 +42,9 @@ export default function SearchBar() {
                 <button className="button-search" type="submit"> search</button>
             </form>
             <ul>
-            <form onSubmit={postStock}>
-                <button className="button-add" type="submit">add stock</button>
-            </form>
-            </ul>
-            <ul>
                 <span>{info}</span> <span>{price}</span>
+                <form onSubmit={postStock}>
+                    <button className="button-add" type="submit">add stock</button></form>
             </ul>
         </div>
     )
