@@ -60,9 +60,7 @@ export default function StockList () {
     }
 
     const splitDate = (date: string) => {
-
-
-        let data = date.split("",1)
+        let data = date.split("",10)
         return data
     }
 
