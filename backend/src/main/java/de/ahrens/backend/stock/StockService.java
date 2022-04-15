@@ -23,7 +23,7 @@ public class StockService {
 
     public StockData searchStock(String stockName) {
 
-        String url = "http://api.marketstack.com/v1/eod?access_key=" + pw + "&limit=14&symbols=" + stockName;
+        String url = "http://api.marketstack.com/v1/eod?access_key=" + pw + "&limit=1&symbols=" + stockName;
 
         ResponseEntity<Stock> response = new RestTemplate().getForEntity(url, Stock.class);
         return Objects.requireNonNull(response.getBody()).getData().get(0);

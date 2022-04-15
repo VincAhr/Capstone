@@ -1,51 +1,57 @@
 import {useEffect, useState} from "react";
-import {searchStock} from "../service/ApiService";
-import {postNewStock} from "../service/ApiService";
+import {postNewStock, searchStock} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
 
 
 export default function SearchBar() {
 
     const [stock, setStock] = useState("")
-    const [info, setInfo] = useState("")
+    const [symbol, setSymbol] = useState("")
     const [price, setPrice] = useState("")
+    const [date, setDate] = useState("")
+    const [error, setError] = useState("")
     const {token} = useAuth()
 
 
     useEffect(() => {
         setStock("")
-    }, [info])
+        setError("")
+        setDate("")
+    }, [symbol])
 
     const getStock = (ev: React.FormEvent) => {
         ev.preventDefault()
         searchStock(stock, token)
             .then(r => {
-                setInfo(r.symbol);
-                setPrice(r.close);
+                setSymbol(r.symbol)
+                setPrice(r.close)
+                setDate(r.date)
             })
     }
 
-    const postStock = (ev: React.FormEvent) => {
-        ev.preventDefault()
-        postNewStock(info, price, token)
+    const postStock = () => {
+        if(symbol.length>0 && price.length>0)
+        postNewStock(symbol, price, date, token)
             .then(() => {
                 setPrice('')
-                setInfo('')
+                setSymbol('')
+                setDate('')
+                setError("")
             })
+        else setError("Not available with empty symbol or price")
+
     }
 
     return (
         <div className='searchbar'>
-            <form onSubmit={getStock}>
+            <form style={{display: "inline"}} onSubmit={getStock} >
                 <input className='search-bar' type="text" placeholder={"search"} value={stock}
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className="button-search" type="submit"> search</button>
             </form>
-            <ul>
-                <span>{info}</span> <span>{price}</span>
-                <form onSubmit={postStock}>
-                    <button className="button-add" type="submit">add stock</button></form>
-            </ul>
+            <button style={{display: "inline"}} className="button-add" type="submit" onClick={postStock}>add stock</button>
+            <p>Symbol: {symbol}</p> <p>Price: {price}</p> <p>Date: {date}</p>
+            <h3>{error}</h3>
         </div>
     )
 }

@@ -41,7 +41,6 @@ export const searchStock = (symbol: string, token: string) => {
             }
         })
 }
-
 export const getAllStocks = (token: string) => {
     return fetch('api/stock', {
         method: 'GET',
@@ -53,7 +52,7 @@ export const getAllStocks = (token: string) => {
         .then(response => response.json())
 }
 
-export const postNewStock = (symbol: string, close: string, token: string) => {
+export const postNewStock = (symbol: string, close: string, date: string, token: string) => {
     return fetch('/api/stock', {
         method: 'POST',
         headers: {
@@ -61,7 +60,7 @@ export const postNewStock = (symbol: string, close: string, token: string) => {
             'Content-Type': 'application/json'
 
         },
-        body: JSON.stringify({'symbol': symbol, 'close': close})
+        body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date})
 
     })
         .then(response => response.json())
