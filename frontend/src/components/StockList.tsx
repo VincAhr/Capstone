@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import {StockItem} from "../model/StockModel";
-import {deleteStock, getAllStocks, postShares, searchStock,} from "../service/ApiService";
+import {deleteStock, getAllStocks, postShares} from "../service/ApiService";
 
 
 
