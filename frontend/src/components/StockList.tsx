@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import {StockItem} from "../model/StockModel";
-import {deleteStock, getAllStocks, postShares,} from "../service/ApiService";
+import {deleteStock, getAllStocks, postShares, searchStock,} from "../service/ApiService";
 
 
 
@@ -11,7 +11,7 @@ export default function StockList () {
     const [error, setError] = useState("")
     const [stocks, setStocks] = useState([] as Array<StockItem>)
     const [editShare,setEditShare] = useState("")
-    const [totalValue, setTotalValue] = useState([] as Array<string>)
+//    const [totalValue, setTotalValue] = useState([] as Array<string>)
     const [editMode, setEditMode] = useState(false)
 
 
@@ -21,8 +21,7 @@ export default function StockList () {
         getAllStocks(token)
             .then(response => setStocks(response))
             .catch(e => setError(e.message))
-        total()
-    }, [editMode, token,])
+    }, [editMode, token])
 
     const deleteFunction = (stock : StockItem) => {
         deleteStock(stock.id, token)
@@ -47,6 +46,13 @@ export default function StockList () {
         setEditMode(false)})
     }
 
+
+    const getStocks = () => {
+        getAllStocks(token)
+            .then(response => setStocks(response))
+            .catch(e => setError(e.message))
+    }
+
     const product = (price : string, anzahl : string) => {
 
         let value = parseInt(price) * parseInt(anzahl)
@@ -55,9 +61,10 @@ export default function StockList () {
         else return 0
     }
 
-    const total = () => {
-        let sum = stocks.map((stocks  => (stocks.close, stocks.shares)))
-    }
+    // const total = () => {
+    //     let sum = stocks.map((stocks  => (stocks.close, stocks.shares)))
+    //     setTotalValue(sum)
+    // }
 
     const splitDate = (date: string) => {
         let data = date.split("",10)
@@ -65,13 +72,12 @@ export default function StockList () {
     }
 
 
-
     return(
         <div>
-            <h2
-                style={{backgroundColor: "grey"}}> Depotlist
-                 total value: {total} {totalValue}
+            <h2 style={{backgroundColor: "grey"}}> Depotlist
+                <h4 style={{display: "inline", marginLeft: 150}}>Total value: </h4>
             </h2>
+            <button onClick={() => getStocks()}> refresh list </button>
                 <h2>{error}</h2>
                 <h4>
                     {stocks.map(stocks =>
