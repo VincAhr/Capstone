@@ -1,8 +1,8 @@
-export interface StockItem {
+export interface Stock {
 
     id: string
     symbol: string;
     close: string;
-    date?: string;
+    date: string;
     shares: string;
 }

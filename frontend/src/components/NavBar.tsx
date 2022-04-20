@@ -8,7 +8,7 @@ export default function NavBar(){
 
     return(
         <div className={'navBar'}>
-            <button onClick={()=> nav('/')}>Homepage</button>
+            <button onClick={()=> nav('/login')}>Refresh Page</button>
             <button onClick={auth.logout}> Logout </button>
         </div>
     )

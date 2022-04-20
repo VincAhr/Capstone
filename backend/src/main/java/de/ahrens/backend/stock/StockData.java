@@ -20,6 +20,7 @@ public class StockData {
     private String close;
     private String user;
     private String shares;
+    private String date;
 
 
 
