@@ -1,107 +1,23 @@
-import React, {useEffect, useState} from "react";
-import {useAuth} from "../auth/AuthProvider";
-import {StockItem} from "../model/StockModel";
-import {deleteStock, getAllStocks, postShares} from "../service/ApiService";
+import {Stock} from "../model/StockModel";
+import React from "react";
+import StockItem from "./StockItem";
+
+interface StockListProps {
+    allStocks: Array<Stock>
+    value: number
+    updateStock: () => void
+}
 
 
-
-export default function StockList () {
-
-    const {token} = useAuth()
-    const [error, setError] = useState("")
-    const [stocks, setStocks] = useState([] as Array<StockItem>)
-    const [editShare,setEditShare] = useState("")
-//    const [totalValue, setTotalValue] = useState([] as Array<string>)
-    const [editMode, setEditMode] = useState(false)
-
-
-
-
-    useEffect(() => {
-        getAllStocks(token)
-            .then(response => setStocks(response))
-            .catch(e => setError(e.message))
-    }, [editMode, token])
-
-    const deleteFunction = (stock : StockItem) => {
-        deleteStock(stock.id, token)
-            .then( () => {
-            getAllStocks(token)
-                .then(response => setStocks(response))
-                .catch(e => setError(e.message))})
-    }
-
-    const editShares = (stock: StockItem) => {
-        postShares( {
-            id: stock.id,
-            symbol: stock.symbol,
-            close: stock.close,
-            date: stock.date,
-            shares:editShare
-        }, token)
-            .then(()=> {
-            getAllStocks(token)
-                .then(response => setStocks(response))
-        setEditShare('')
-        setEditMode(false)})
-    }
-
-
-    const getStocks = () => {
-        getAllStocks(token)
-            .then(response => setStocks(response))
-            .catch(e => setError(e.message))
-    }
-
-    const product = (price : string, anzahl : string) => {
-
-        let value = parseInt(price) * parseInt(anzahl)
-        if(value>0) {
-            return value}
-        else return 0
-    }
-
-    // const total = () => {
-    //     let sum = stocks.map((stocks  => (stocks.close, stocks.shares)))
-    //     setTotalValue(sum)
-    // }
-
-    const splitDate = (date: string) => {
-        let data = date.split("",10)
-        return data
-    }
-
+export default function StockList(props: StockListProps) {
 
     return(
         <div>
-            <h2 style={{backgroundColor: "grey"}}> Depotlist
-                <h4 style={{display: "inline", marginLeft: 150}}>Total value: </h4>
-            </h2>
-            <button onClick={() => getStocks()}> refresh list </button>
-                <h2>{error}</h2>
-                <h4>
-                    {stocks.map(stocks =>
-                        <div>
-                            <p>name :   {stocks.symbol}</p>
-                            <p>price :  {stocks.close} $</p>
-                            <p>date :   {splitDate(stocks.date)}</p>
-                            <p>shares : {stocks.shares}</p>
-                            <p>value :  {product(stocks.close, stocks.shares)} $ </p>
-
-                            {
-                                editMode
-                                    ?
-                                    <div>
-                                    <input className='edit-bar' type="text" placeholder={"edit quantitiy"} value={editShare} onChange={ev => setEditShare(ev.target.value)}/><button className="button-list" onClick={() => editShares(stocks)}> save </button>
-                                    </div>
-                                    :
-                                    <div>
-                                    <button className="button-list" onClick={() => setEditMode(true)} > edit quantity </button>
-                                    </div>
-                            }
-                            <button className="button-list" onClick={() => deleteFunction(stocks)}> delete stock </button>
-                        </div>)}
-                </h4>
+            <h2 style={{backgroundColor: "grey"}}> Depotlist</h2>
+            <button style={{inlineSize:100, marginLeft: 20}} onClick={() => props.updateStock()}> Refresh list </button>
+            <h4 style={{backgroundColor: "", marginLeft: 20}}>
+            {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} updateStock={props.updateStock}/>)}
+            </h4>
         </div>
     )
 }

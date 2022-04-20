@@ -2,8 +2,12 @@ import {useEffect, useState} from "react";
 import {postNewStock, searchStock} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
 
+interface SearchBarProps {
+    onAddStock : () => void;
+}
 
-export default function SearchBar() {
+
+export default function SearchBar(props: SearchBarProps) {
 
     const [stock, setStock] = useState("")
     const [symbol, setSymbol] = useState("")
@@ -38,8 +42,8 @@ export default function SearchBar() {
                 setDate('')
                 setError("")
             })
+            .then(() => props.onAddStock())
         else setError("Not available with empty symbol or price")
-
     }
 
     return (
@@ -50,7 +54,7 @@ export default function SearchBar() {
                 <button className="button-search" type="submit"> search</button>
             </form>
             <button style={{display: "inline"}} className="button-add" type="submit" onClick={postStock}>add stock</button>
-            <p>Symbol: {symbol}</p> <p>Price: {price}</p> <p>Date: {date}</p>
+            <p>Symbol: {symbol}</p> <p>Price: {price}</p> <p>Date: {date.split("",10)}</p>
             <h3>{error}</h3>
         </div>
     )

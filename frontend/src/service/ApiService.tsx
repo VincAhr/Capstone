@@ -1,5 +1,5 @@
 import {LoginData, RegisterData} from "../model/UserModel";
-import {StockItem} from "../model/StockModel";
+import {Stock} from "../model/StockModel";
 
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
     return fetch(`/api/user`, {
@@ -67,7 +67,7 @@ export const postNewStock = (symbol: string, close: string, date: string, token:
         .catch(e => console.log(e.message))
 }
 
-export const postShares = (stock: StockItem, token: string) => {
+export const postShares = (stock: Stock, token: string) => {
     return fetch(`/api/stock/`, {
         method: 'PUT',
         headers: {
