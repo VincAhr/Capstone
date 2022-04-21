@@ -1,0 +1,50 @@
+.Greeting{
+    width:100%;
+    margin-left:34%;
+    margin-right:25%;
+    margin-bottom: 6%;
+}
+
+.List{
+    width: 70%;
+    margin: auto;
+}
+.Login{
+    width:250px;
+    margin-left:25%;
+    margin-right:25%;
+}
+.Login-Input{
+    height: 20px;
+    width:250px;
+    margin-left:25%;
+    margin-right:25%;
+    text-align: center;
+}
+.Login-Button{
+    height: 30px;
+    width:260px;
+    margin-left:25%;
+    margin-right:25%;
+}
+.Register{
+    width:250px;
+    margin-left:25%;
+    margin-right:25%;
+}
+.Register-Input{
+    height: 20px;
+    width:250px;
+    margin-left:25%;
+    margin-right:25%;
+    text-align: center;
+}
+.Register-Button{
+    height: 30px;
+    width:260px;
+    margin-left:25%;
+    margin-right:25%;
+}
+
+
+

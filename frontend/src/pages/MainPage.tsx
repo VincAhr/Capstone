@@ -7,6 +7,7 @@ import {getAllStocks} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
 import React, {useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
+import "./Pages.css"
 
 
 
