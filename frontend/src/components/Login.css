@@ -16,34 +16,55 @@
 }
 .Login-Input{
     height: 20px;
-    width:250px;
+    width:100%;
+    max-width: 250px;
     margin-left:25%;
     margin-right:25%;
     text-align: center;
+
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #7ad976;
 }
 .Login-Button{
     height: 30px;
-    width:260px;
+    width:100%;
+    max-width: 260px;
     margin-left:25%;
     margin-right:25%;
+
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #154206;
 }
 .Register{
     width:250px;
     margin-left:25%;
     margin-right:25%;
+
 }
 .Register-Input{
     height: 20px;
-    width:250px;
+    width:100%;
+    max-width: 250px;
     margin-left:25%;
     margin-right:25%;
     text-align: center;
+
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #153bb2;
 }
 .Register-Button{
     height: 30px;
-    width:260px;
+    width:100%;
+    max-width: 260px;
     margin-left:25%;
     margin-right:25%;
+
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid #153bb2;
 }
 
 

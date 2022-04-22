@@ -1,6 +1,7 @@
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {postNewStock, searchStock} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
+import "./SearchBar.css"
 
 interface SearchBarProps {
     onAddStock : () => void;
@@ -56,6 +57,7 @@ export default function SearchBar(props: SearchBarProps) {
             <button style={{display: "inline"}} className="button-add" type="submit" onClick={postStock}>add stock</button>
             <p>Symbol: {symbol}</p> <p>Price: {price}</p> <p>Date: {date.split("",10)}</p>
             <h3>{error}</h3>
+            <h2 className={"DepotList-Banner"}> Depotlist</h2>
         </div>
     )
 }
