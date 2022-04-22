@@ -2,6 +2,7 @@ import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
 import NavBar from "../components/NavBar";
 import StockList from "../components/StockList";
+import Footer from "../components/Footer";
 import {PieChart} from "../components/PieChart";
 import {getAllStocks} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
@@ -63,6 +64,7 @@ export default function MainPage(){
             <div style={{order: 1}} className={"StockList-Container"}> <StockList  allStocks={stocks} value={totalValue} updateStock={getStocks}/></div>
             <div style={{order: 2}} className={"PieChart-Container"}> <PieChart names={name} price={price} value={totalValue}/></div>
             </div>
+            <Footer/>
         </div>
     )
 }

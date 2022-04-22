@@ -44,7 +44,7 @@ export default function SearchBar(props: SearchBarProps) {
                 setError("")
             })
             .then(() => props.onAddStock())
-        else setError("Not available with empty symbol or price")
+        else setError("Not available with empty symbol, price and date")
     }
 
     return (

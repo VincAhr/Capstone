@@ -1,0 +1,17 @@
+.Footer-Container{
+
+
+    height: 50px;
+    margin-top: 50px;
+    margin-bottom:20px;
+
+
+}
+.Footer-Content{
+    background-color: #b4d6d5;
+    border: 3px solid #000000;
+    border-radius: 5px;
+
+    text-align: center;
+
+}

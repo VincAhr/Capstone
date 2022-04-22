@@ -14,6 +14,7 @@ export default function StockItem (props: StockItemProps) {
     const {token} = useAuth()
     const [share,setShare] = useState("")
     const [editMode, setEditMode] = useState(false)
+    const [error, setError] = useState("")
 
 
     const editShares = (stock: Stock) => {
@@ -26,10 +27,14 @@ export default function StockItem (props: StockItemProps) {
                 shares: share
             }, token)
             .then(() => props.updateStock())
-        setShare('')
-        setEditMode(false)
+            setShare("")
+            setEditMode(false)
+            setError("")
         }
-        else console.log("Shares must be greater then 0")
+        else{
+            setError("Shares must be greater then 0!")
+            setEditMode(false)
+        }
     }
 
     const deleteFunction = (stock: Stock) => {
@@ -56,14 +61,13 @@ export default function StockItem (props: StockItemProps) {
                     {editMode
                             ?
                             <div>
-                                <input className='edit-bar' type="text" placeholder={"edit quantitiy"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <button className="button-list" onClick={() => editShares(props.stock)}> save </button>
+                                <input type="text" placeholder={"edit quantitiy"} value={share} onChange={ev => setShare(ev.target.value)}/>
+                                <button onClick={() => editShares(props.stock)}> save </button>
                             </div>
                             :
-                            <div>
-                                <button style={{display: "inline"}} className="button-list" onClick={() => setEditMode(true)} > edit shares </button>
-                            </div>
+                            <div> <button style={{display: "inline"}} className="button-list" onClick={() => setEditMode(true)} > edit shares </button> {error} </div>
                     }
+
                     <button style={{display: "inline"}} className="button-list" onClick={() => deleteFunction(props.stock)} > delete stock </button>
                 </h4>
         </div>
