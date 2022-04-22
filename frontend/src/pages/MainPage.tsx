@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import {PieChart} from "../components/PieChart";
 import {getAllStocks} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
 import "./Pages.css"
 
@@ -23,26 +23,26 @@ export default function MainPage(){
 
     useEffect(() => {
       getStocks()
-    }, [token]) // eslint-disable-line react-hooks/exhaustive-deps
+    }, [token])
 
     useEffect(() => {
         total()
         creatPriceArray()
         createNameArray()
-    },[stocks]) // eslint-disable-line react-hooks/exhaustive-deps
+    },[stocks])
 
-    const getStocks = () => {
+    const getStocks = useCallback(() => {
         getAllStocks(token)
             .then(response => setStocks(response))
             .catch(e => setError(e.message))
-    }
+    }, [])
 
-    const total = () => {
+    const total = useCallback(() => {
         let sum = 0
         for (let i = 0; i < stocks.length; i++) {
             sum += (parseFloat(stocks[i].close) * parseFloat(stocks[i].shares))
         } setTotalValue(sum)
-    }
+    }, [])
 
     const creatPriceArray = () => {
         setPrice([...stocks.map(value => parseFloat((parseFloat(value.close)*parseFloat(value.shares)).toFixed(2)))])
