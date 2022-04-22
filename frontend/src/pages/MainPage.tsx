@@ -7,6 +7,7 @@ import {getAllStocks} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
 import React, {useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
+import "./Pages.css"
 
 
 
@@ -53,14 +54,15 @@ export default function MainPage(){
 
 
     return(
-        <div className={'main'}>
+        <div className={'MainPage'}>
             <NavBar/>
             <Header/>
             <SearchBar onAddStock={getStocks} />
             <h2>{error}</h2>
-            <div> <StockList allStocks={stocks} value={totalValue} updateStock={getStocks}/></div>
-            <div className={"PieChart-Container"}> <PieChart names={name} price={price}/></div>
-            <div><h1>Total value: <p>{totalValue.toFixed(2)}$</p></h1></div>
+            <div className={"Flex-Container"}>
+            <div style={{order: 1}} className={"StockList-Container"}> <StockList  allStocks={stocks} value={totalValue} updateStock={getStocks}/></div>
+            <div style={{order: 2}} className={"PieChart-Container"}> <PieChart names={name} price={price} value={totalValue}/></div>
+            </div>
         </div>
     )
 }

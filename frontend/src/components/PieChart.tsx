@@ -1,12 +1,14 @@
 import React from 'react';
 import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 import {Pie} from 'react-chartjs-2';
+import "./Pie-Chart.css"
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface PieChartProps {
     names: Array<string>
     price: Array<number>
+    value: number
 }
 
 export function PieChart(props: PieChartProps) {
@@ -39,5 +41,10 @@ export function PieChart(props: PieChartProps) {
         ],
     };
 
-    return <Pie data={data}/>;
+    return  (
+        <div className={"Pie-Chart"}><  Pie data={data}/>
+        <h2 className={"Total-Value"}><p>Total value: {props.value.toFixed(2)}$</p></h2>
+        </div>
+        )
+
 }

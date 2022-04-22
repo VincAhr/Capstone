@@ -1,5 +1,6 @@
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../auth/AuthProvider";
+import "./NavBar.css"
 
 export default function NavBar(){
     const nav = useNavigate()
@@ -7,9 +8,9 @@ export default function NavBar(){
 
 
     return(
-        <div className={'navBar'}>
-            <button onClick={()=> nav('/login')}>Refresh Page</button>
-            <button onClick={auth.logout}> Logout </button>
+        <div className={'NavBar-Container'}>
+            <button className={"NavBar-Button"} onClick={()=> nav('/login')}>Refresh Page</button>
+            <button className={"NavBar-Button"}  onClick={auth.logout}> Logout </button>
         </div>
     )
 }
