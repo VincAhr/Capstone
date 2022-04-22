@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import {PieChart} from "../components/PieChart";
 import {getAllStocks} from "../service/ApiService";
 import {useAuth} from "../auth/AuthProvider";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
 import "./Pages.css"
 
@@ -21,6 +21,7 @@ export default function MainPage(){
     const [price, setPrice] = useState([] as Array<number>)
     const [name, setName] = useState([] as Array<string>)
 
+    /*eslint-disable */
     useEffect(() => {
       getStocks()
     }, [token])
@@ -30,19 +31,20 @@ export default function MainPage(){
         creatPriceArray()
         createNameArray()
     },[stocks])
+    /*eslint-disable */
 
-    const getStocks = useCallback(() => {
+    const getStocks = () => {
         getAllStocks(token)
             .then(response => setStocks(response))
             .catch(e => setError(e.message))
-    }, [])
+    }
 
-    const total = useCallback(() => {
+    const total = () => {
         let sum = 0
         for (let i = 0; i < stocks.length; i++) {
             sum += (parseFloat(stocks[i].close) * parseFloat(stocks[i].shares))
         } setTotalValue(sum)
-    }, [])
+    }
 
     const creatPriceArray = () => {
         setPrice([...stocks.map(value => parseFloat((parseFloat(value.close)*parseFloat(value.shares)).toFixed(2)))])
