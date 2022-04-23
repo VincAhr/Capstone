@@ -1,4 +1,5 @@
 import {useAuth} from "../auth/AuthProvider";
+import "./Header.css"
 
 
 export default function Header() {
@@ -8,7 +9,7 @@ export default function Header() {
 
 
     return (
-        <div className={'header'}>
+        <div className={"Header"}>
             <h2>Hallo {username}</h2>
         </div>
 )

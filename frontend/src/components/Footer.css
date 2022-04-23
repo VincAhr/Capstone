@@ -1,17 +1,24 @@
 .Footer-Container{
 
-
-    height: 50px;
     margin-top: 50px;
     margin-bottom:20px;
-
-
 }
 .Footer-Content{
     background-color: #b4d6d5;
     border: 3px solid #000000;
     border-radius: 5px;
-
     text-align: center;
+}
 
+.Footer-Button{
+    max-width: 100px;
+    margin-top: 0.3%;
+    max-height: 40px;
+
+    border-radius: 6px;
+    background-color: black;
+}
+
+.Footer-Button:hover {
+    background-color: #174ee8;
 }

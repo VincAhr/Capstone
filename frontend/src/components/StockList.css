@@ -1,13 +1,13 @@
 .Button-Refresh{
 
-    margin-left: 20px;
-    margin-bottom: 20px;
+    margin-left: 4%;
+    margin-bottom: 10px;
     height: 25px;
     width:100%;
     max-width: 350px;
+    font-size: 15px;
 
-    font-size: 13px;
-    background-color: #b5d8d6;
+    background-color: #b4d6d5;
 
     border-radius: 5px;
     border: 1px solid #000000;
@@ -22,7 +22,7 @@
 
 .Button-Refresh:after{
     content: "";
-    background: #f1f1f1;
+    background: #b4d6d5;
     display: block;
     position: absolute;
     padding-top: 300%;
@@ -38,4 +38,11 @@
     margin: 0;
     opacity: 1;
     transition: 0s
+}
+
+.Button-Refresh:hover {
+    background-color: #67fdc9;
+}
+
+.StockList{
 }

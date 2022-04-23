@@ -14,8 +14,8 @@ export default function StockList(props: StockListProps) {
 
     return(
         <div>
-            <button className={"Button-Refresh"}  onClick={() => props.updateStock()}> Refresh list </button>
-            <h4 style={{backgroundColor: "", marginLeft: 20}}>
+            <button className={"Button-Refresh"} onClick={() => props.updateStock()}> Refresh list </button>
+            <h4 className={"StockList"}>
             {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} updateStock={props.updateStock}/>)}
             </h4>
         </div>
