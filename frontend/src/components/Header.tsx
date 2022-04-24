@@ -10,7 +10,7 @@ export default function Header() {
 
     return (
         <div className={"Header"}>
-            <h2>Hallo {username}</h2>
+            <h2>Welcome back {username}</h2>
         </div>
 )
 }

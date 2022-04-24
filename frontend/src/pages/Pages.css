@@ -27,10 +27,10 @@
 .PieChart-Container{
     order: 2;
     margin-top: 25px;
-    margin-left: 250px;
+    margin-left: 200px;
 
     width: 100%;
-    max-width: 650px;
+    max-width: 550px;
     padding: 20px;
 
     border: 1px solid #ffffff;

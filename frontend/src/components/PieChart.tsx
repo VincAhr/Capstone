@@ -29,7 +29,7 @@ export function PieChart(props: PieChartProps) {
                     'rgba(255, 159, 64, 0.2)',
                 ],
                 borderColor: [
-                    'rgba(255, 99, 132, 1)',
+                    'rgb(255,37,84)',
                     'rgba(54, 162, 235, 1)',
                     'rgba(255, 206, 86, 1)',
                     'rgba(75, 192, 192, 1)',

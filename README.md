@@ -4,4 +4,6 @@ This is an application where you can add stocks that are listed in the Nasdaq. T
 
 ## Picture of the MainPage
 
+<img src="./MainPage.png">
+
 
