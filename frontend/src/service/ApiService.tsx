@@ -60,7 +60,7 @@ export const postNewStock = (symbol: string, close: string, date: string, token:
             'Content-Type': 'application/json'
 
         },
-        body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date})
+        body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date, 'shares': "0"})
 
     })
         .then(response => response.json())
