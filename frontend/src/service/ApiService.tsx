@@ -41,6 +41,7 @@ export const searchStock = (symbol: string, token: string) => {
             }
         })
 }
+
 export const getAllStocks = (token: string) => {
     return fetch('api/stock', {
         method: 'GET',
@@ -48,9 +49,9 @@ export const getAllStocks = (token: string) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-    })
-        .then(response => response.json())
+    }).then(response => response.json())
 }
+
 
 export const postNewStock = (symbol: string, close: string, date: string, token: string) => {
     return fetch('/api/stock', {

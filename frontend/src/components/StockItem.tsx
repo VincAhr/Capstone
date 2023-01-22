@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import {Stock} from "../model/StockModel";
-import {deleteStock, postShares} from "../service/ApiService";
+import {deleteStock, postShares, searchStock} from "../service/ApiService";
 import "./StockItem.css";
 
 
@@ -17,6 +17,8 @@ export default function StockItem (props: StockItemProps) {
     const [share,setShare] = useState("")
     const [editMode, setEditMode] = useState(false)
     const [error, setError] = useState("")
+    const [price, setPrice] = useState("")
+    const [newDate, setNewDate] = useState("")
 
 
     const editShares = (stock: Stock) => {
@@ -38,6 +40,25 @@ export default function StockItem (props: StockItemProps) {
             setEditMode(false)
         }
     }
+
+
+    const RefreshDataStock = (stock : Stock) => {
+            searchStock(props.stock.symbol, token)
+                .then(r => {
+                    setPrice(r.close)
+                    setNewDate(r.date)
+                })
+                .then( () =>  postShares( {
+                    id: stock.id,
+                    symbol: stock.symbol,
+                    close: price,
+                    date: newDate,
+                    shares: stock.shares
+                }, token))
+                .then( () => {props.updateStock()})
+    }
+
+
 
     const deleteFunction = (stock: Stock) => {
         deleteStock(stock.id, token)
@@ -64,12 +85,13 @@ export default function StockItem (props: StockItemProps) {
                             ?
                             <div>
                                 <input className={"Input-Save"} type="text" placeholder={"edit quantitiy"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <button className={"Button-Save"} onClick={() => editShares(props.stock)}> save </button>
+                                <button className={"Button-Item"} onClick={() => editShares(props.stock)}> save </button>
                             </div>
                             :
-                            <div> <button className={"Button-Edit"} style={{display: "inline"}} onClick={() => setEditMode(true)} > edit shares </button> {error} </div>
+                            <div> <button className={"Button-Item"} style={{display: "inline"}} onClick={() => setEditMode(true)} > Edit shares </button> {error} </div>
                     }
-                    <button className={"Button-Delete" } style={{display: "inline"}} onClick={() => deleteFunction(props.stock)} > delete stock </button>
+                    <button className={"Button-Item"} style={{display: "inline"}} onClick={() => deleteFunction(props.stock)} > Delete stock </button>
+                    <button className={"Button-Item"} style={{display: "inline"}} onClick={() => RefreshDataStock(props.stock)} > Refresh data</button>
                 </h4>
         </div>
     )

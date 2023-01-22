@@ -19,13 +19,15 @@ public class StockService {
 
     @Value("${app.marketstack.password}")
     String pw;
+
     private final StockRepository stockRepository;
+
+    private final String API_URL = "http://api.marketstack.com/v1/eod?access_key=" + pw + "&limit=1&symbols=";
 
     public StockData searchStock(String stockName) {
 
-        String url = "http://api.marketstack.com/v1/eod?access_key=" + pw + "&limit=1&symbols=" + stockName;
 
-        ResponseEntity<Stock> response = new RestTemplate().getForEntity(url, Stock.class);
+        ResponseEntity<Stock> response = new RestTemplate().getForEntity(API_URL + stockName, Stock.class);
         return Objects.requireNonNull(response.getBody()).getData().get(0);
     }
 
@@ -53,5 +55,4 @@ public class StockService {
         stockRepository.delete(stockData);
         return stockData;
     }
-
 }
