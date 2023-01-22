@@ -11,12 +11,9 @@
 
     font-size: 14px;
     background-color: #ffffff;
-
-    border-radius: 5px;
-    border: 1px solid #000000;
 }
 
-.Button-Add{
+.button{
     height: 23px;
     width:100px;
 
@@ -26,6 +23,15 @@
     border-radius: 5px;
     border: 1px solid #000000;
 
+}
+
+.button:hover {background-color: #9db1fc
+}
+
+.button:active {
+    background-color: #54cb5a;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
 
 .Stock-Info{
