@@ -16,22 +16,23 @@
 .button{
     height: 23px;
     width:100px;
-
     font-size: 14px;
-    background-color: #b5d8d6;
-
+    background-color: #acefb0;
     border-radius: 5px;
     border: 1px solid #000000;
 
 }
 
-.button:hover {background-color: #9db1fc
+.button:hover {
+    background-color: #cad4fc;
+    box-shadow: 2px 2px 5px #939393;
 }
 
 .button:active {
-    background-color: #54cb5a;
-    box-shadow: 0 5px #666;
-    transform: translateY(4px);
+    background-color: #acefb0;
+    box-shadow: 2px 2px 5px #939393;
+    animation: blinnker 1s linear infinite;
+    color : #666600;
 }
 
 .Stock-Info{
@@ -43,9 +44,7 @@
 .Symbol{
     height: 23px;
     width:250px;
-
     text-align: justify-all;
-
     border-bottom: 1px solid #000000;
 }
 

@@ -1,57 +1,12 @@
 .StockItem{
-
-
     background-color: #ffffff;
 
     border-radius: 5px;
     border: 2px solid #000000;
     padding: 5px
-
 }
 
-.Button-Edit{
-    margin-bottom: 5px;
-    height: 25px;
-    width:100%;
-
-    font-size: 15px;
-    background-color: #b5d8d6;
-
-    border-radius: 5px;
-    border: 1px solid #000000;
-
-
-}
-
-.Button-Save{
-    height: 25px;
-    width:100%;
-    margin-bottom: 5px;
-
-    font-size: 15px;
-    background-color: #b5d8d6;
-
-    border-radius: 5px;
-    border: 1px solid #000000;
-
-}
-
-.Input-Save{
-    width:98.5%;
-    height: 22px;
-    margin-bottom: 5px;
-
-    font-size: 15px;
-    background-color: #ffffff;
-
-    border-radius: 5px;
-    border: 1px solid #000000;
-
-
-}
-
-.Button-Delete{
-
+.Button-Item{
     margin-bottom: 10px;
     height: 25px;
     width:100%;
@@ -61,6 +16,28 @@
 
     border-radius: 5px;
     border: 1px solid #000000;
+}
+
+.Button-Item:hover {
+    background-color: #b1e8d3;
+}
+
+.Button-Item:active {
+    background-color: #acefb0;
+    box-shadow: 2px 2px 5px #939393;
+    animation: blinnker 1s linear infinite;
+    color : #666600;
+}
 
 
+.Input-Save{
+    width:98.5%;
+    height: 22px;
+    margin-bottom: 10px;
+
+    font-size: 15px;
+    background-color: #ffffff;
+
+    border-radius: 5px;
+    border: 1px solid #000000;
 }
