@@ -58,7 +58,6 @@ export const postNewStock = (symbol: string, close: string, date: string, token:
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
-
         },
         body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date, 'shares': "0"})
 

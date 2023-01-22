@@ -27,7 +27,6 @@ public class StockService {
 
         ResponseEntity<Stock> response = new RestTemplate().getForEntity(url, Stock.class);
         return Objects.requireNonNull(response.getBody()).getData().get(0);
-
     }
 
 
