@@ -6,38 +6,102 @@
     padding: 5px
 }
 
+.arrow{
+    height: 40px;
+    width: 40px;
+    float: right;
+
+    margin-right: 4%;
+    margin-top: 2%;
+
+    border-radius: 10px;
+
+}
+
+.arrow:hover{
+    box-shadow: 4px 4px 8px #67fdc9;
+}
+
+.edit{
+    height: 16px;
+    width: 16px;
+    margin-left: 8%;
+
+    border-radius: 2px;
+
+}
+
+.edit:hover{
+    box-shadow: 2px 4px 4px 6px rgba(103, 253, 201, 0.55);
+    background-color: rgba(103, 253, 201, 0.5);
+}
+
 .Button-Item{
+    margin-left: 3%;
     margin-bottom: 10px;
     height: 25px;
-    width:100%;
-
+    width:90%;
+    max-width: 350px;
     font-size: 15px;
-    background-color: #b5d8d6;
+
+    background-color: rgba(195, 231, 230, 0.8);
+    color: #000000;
 
     border-radius: 5px;
     border: 1px solid #000000;
+
+    position: relative;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
 }
 
+
+
 .Button-Item:hover {
-    background-color: #b1e8d3;
+    background-color: #67fdc9;
 }
 
 .Button-Item:active {
     background-color: #acefb0;
     box-shadow: 2px 2px 5px #939393;
     animation: blinnker 1s linear infinite;
-    color : #666600;
 }
 
 
-.Input-Save{
-    width:98.5%;
-    height: 22px;
-    margin-bottom: 10px;
+.Input-Share{
+    width: 100px;
+    margin-left: 30px;
 
-    font-size: 15px;
+
+    display: inline;
+    text-align: center;
     background-color: #ffffff;
 
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px solid #000000;
+}
+
+.Save-Button{
+    display: inline;
+    width: 70px ;
+    background-color: rgba(195, 231, 230, 0.8);
+    color: #000000;
+
+    border-radius: 4px;
+    border: 1px solid #000000;
+
+
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+
+}
+
+.Save-Button:hover {
+    background-color: #67fdc9;
 }

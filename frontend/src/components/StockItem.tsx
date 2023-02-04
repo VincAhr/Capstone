@@ -3,6 +3,9 @@ import {useAuth} from "../auth/AuthProvider";
 import {Stock} from "../model/StockModel";
 import {deleteStock, updateStock, searchStock} from "../service/ApiService";
 import "./StockItem.css";
+import arrow from "../pictures/refresh_arrow_4502.png";
+import edit from "../pictures/pencil.png";
+
 
 
 interface  StockItemProps {
@@ -81,26 +84,26 @@ export default function StockItem (props: StockItemProps) {
     return(
         <div>
                 <h4 className={"StockItem"}>
+                    <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock()}/>
                     <p>Name:    {props.stock.symbol}</p>
                     {price.length>1
                     ?
-                    <p>Price:   {price} $</p>
+                    <p>Price:   {price}$</p>
                     :
-                    <p>Price:   {props.stock.close} $</p>}
+                    <p>Price:   {props.stock.close}$</p>}
                     <p>Date:    {splitDate(props.stock.date)}</p>
-                    <p>Shares:  {props.stock.shares}</p>
-                    <p>Value:   {product(props.stock.close, props.stock.shares)} $</p>
-                    {editMode
-                            ?
-                            <div>
-                                <input className={"Input-Save"} type="text" placeholder={"edit quantity"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <button className={"Button-Item"} onClick={() => editShares(props.stock)}> save </button>
-                            </div>
-                            :
-                            <div> <button className={"Button-Item"} style={{display: "inline"}} onClick={() => setEditMode(true)} > Edit shares </button> {error} </div>
-                    }
-                    <button className={"Button-Item"} style={{display: "inline"}} onClick={() => deleteFunction(props.stock)} > Delete stock </button>
-                    <button className={"Button-Item"} style={{display: "inline"}} onClick={() => RefreshDataStock()} > Refresh data</button>
+                    <p>Shares:  {props.stock.shares}
+                    <img src={(edit)} alt={"what?"} className={"edit"} title="Edit"  onClick={() => setEditMode(true)}/>
+                        {editMode?
+                            <div style={{display: "inline"}}>
+                                <input className={"Input-Share"} type="text" placeholder={"Shares"} value={share} onChange={ev => setShare(ev.target.value)}/>
+                                <button className={"Save-Button"} onClick={() => editShares(props.stock)}> Save </button>
+                             </div>: null
+                        }
+                    </p>
+                    <p>Value:   {product(props.stock.close, props.stock.shares)}$</p>
+                    <button className={"Button-Item"} onClick={() => deleteFunction(props.stock)} > Delete stock </button>
+                    <button className={"Button-Item"} onClick={() => RefreshDataStock()} > <i>Details Placeholder</i></button>
                 </h4>
         </div>
     )

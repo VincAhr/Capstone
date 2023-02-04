@@ -1,18 +1,16 @@
 .Greeting{
-    width:100%;
-    margin-left:34%;
-    margin-right:25%;
+    text-align: center;
     margin-bottom: 6%;
 }
 
 .List{
-    width: 70%;
     margin: auto;
+    text-align: center;
+    list-style: inside;
 }
 .Login{
-    width:250px;
-    margin-left:25%;
-    margin-right:25%;
+    text-align: center;
+    list-style: inside;
 }
 .Login-Input{
     height: 20px;
@@ -24,7 +22,7 @@
 
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid #7ad976;
+    border: 2px solid rgba(0, 0, 0, 0.7);
 }
 .Login-Button{
     height: 30px;
@@ -32,15 +30,31 @@
     max-width: 260px;
     margin-left:25%;
     margin-right:25%;
+    font-size:88%;
 
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid #79d776;
+    background-color: rgba(205, 209, 239, 0.87);
+    border: 2px solid #a4afd3;
 }
+
+.Login-Button:hover{
+    background-color: rgba(183, 250, 179, 0.5); ;
+    cursor: pointer;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
 .Register{
-    width:250px;
-    margin-left:25%;
-    margin-right:25%;
+    text-align: center;
+    list-style: inside;
+    margin-top: 5%;
 
 }
 .Register-Input{
@@ -53,7 +67,7 @@
 
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid #153bb2;
+    border: 2px solid rgba(0, 0, 0, 0.7);
 }
 .Register-Button{
     height: 30px;
@@ -61,10 +75,26 @@
     max-width: 260px;
     margin-left:25%;
     margin-right:25%;
+    font-size:88%;
 
     padding: 5px;
     border-radius: 10px;
-    border: 2px solid #153bb2;
+    background-color: rgba(205, 209, 239, 0.87);
+    border: 2px solid #a4afd3;
+    margin-bottom: 100px;
+}
+
+.Register-Button:hover{
+    background-color: rgba(112, 133, 215, 0.58); ;
+    cursor: pointer;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
 }
 
 
