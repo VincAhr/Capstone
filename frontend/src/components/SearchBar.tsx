@@ -14,6 +14,7 @@ export default function SearchBar(props: SearchBarProps) {
     const [symbol, setSymbol] = useState("")
     const [price, setPrice] = useState("")
     const [date, setDate] = useState("")
+    const [shares, setShares] = useState("")
     const [error, setError] = useState("")
     const [error2 , setError2] = useState("")
     const {token} = useAuth()
@@ -23,6 +24,7 @@ export default function SearchBar(props: SearchBarProps) {
         setStock("")
         setError("")
         setDate("")
+        setShares("")
     }, [symbol])
 
     const getStock = (ev: React.FormEvent) => {
@@ -40,11 +42,12 @@ export default function SearchBar(props: SearchBarProps) {
 
     const postStock = () => {
         if (symbol.length > 0 && price.length > 0)
-            postNewStock(symbol, price, date, token)
+            postNewStock(symbol, price, date, shares,token)
                 .then(() => {
                     setPrice('')
                     setSymbol('')
                     setDate('')
+                    setShares("")
                     setError("")
                 })
                 .then(() => props.onAddStock())
@@ -62,8 +65,12 @@ export default function SearchBar(props: SearchBarProps) {
             </button>
             <h4>{error2}</h4>
             <p className={"Stock-Info"}>
-                <p className={"Symbol"}>Symbol: {symbol}</p> <p className={"Symbol"}>Price: {price}</p> <p
-                className={"Symbol"}>Date: {date.split("", 10)}</p>
+                <p className={"Symbol"}>Symbol: {symbol}</p>
+                <p className={"Symbol"}>Price: {price}</p>
+                <p className={"Symbol"}>Date: {date.split("", 10)}</p>
+                <p className={"Symbol"}>Shares:
+                <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"Set shares"} value={shares}  onChange={ev => setShares(ev.target.value)} />
+                </p>
             </p>
             <h3>{error}</h3>
             <h2 className={"DepotList-Banner"}> Depotlist</h2>

@@ -53,14 +53,14 @@ export const getAllStocks = (token: string) => {
 }
 
 
-export const postNewStock = (symbol: string, close: string, date: string, token: string) => {
+export const postNewStock = (symbol: string, close: string, date: string, shares: string, token: string) => {
     return fetch('/api/stock', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date, 'shares': "0"})
+        body: JSON.stringify({'symbol': symbol, 'close': close, 'date': date, 'shares': shares})
 
     })
         .then(response => response.json())
