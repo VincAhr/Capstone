@@ -22,12 +22,14 @@ public class StockService {
 
     private final StockRepository stockRepository;
 
-    private final String API_URL = "http://api.marketstack.com/v1/eod?access_key=" + pw + "&limit=1&symbols=";
+    private final String API_URL = "http://api.marketstack.com/v1/eod?access_key=";
+    private final String API_LIMIT = "&limit=1&symbols=";
+
 
     public StockData searchStock(String stockName) {
 
 
-        ResponseEntity<Stock> response = new RestTemplate().getForEntity(API_URL + stockName, Stock.class);
+        ResponseEntity<Stock> response = new RestTemplate().getForEntity(API_URL + pw + API_LIMIT + stockName, Stock.class);
         return Objects.requireNonNull(response.getBody()).getData().get(0);
     }
 
@@ -37,16 +39,16 @@ public class StockService {
         return stockRepository.save(newStock);
     }
 
-    public List<StockData> getAllSaved(Principal principal) {
-        return stockRepository.findAllByUser(principal.getName());
-    }
-
-    public StockData addShares(StockData stockData, Principal principal) {
+    public StockData updateStock(StockData stockData, Principal principal) {
         if (stockRepository.findById(stockData.getId()).isPresent()) {
             stockData.setUser(principal.getName());
             stockRepository.save(stockData);
         }
         return stockData;
+    }
+
+    public List<StockData> getAllSaved(Principal principal) {
+        return stockRepository.findAllByUser(principal.getName());
     }
 
     public StockData deleteStock(String idToDelete, Principal principal) {
@@ -55,4 +57,6 @@ public class StockService {
         stockRepository.delete(stockData);
         return stockData;
     }
+
+
 }

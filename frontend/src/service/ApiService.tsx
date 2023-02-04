@@ -37,7 +37,7 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw Error("Stock with the name " + symbol + " is not existing!")
+                throw Error("API can't be reached or searched value doesn't exist")
             }
         })
 }
@@ -67,7 +67,7 @@ export const postNewStock = (symbol: string, close: string, date: string, token:
         .catch(e => console.log(e.message))
 }
 
-export const postShares = (stock: Stock, token: string) => {
+export const updateStock = (stock: Stock, token: string) => {
     return fetch(`/api/stock/`, {
         method: 'PUT',
         headers: {
