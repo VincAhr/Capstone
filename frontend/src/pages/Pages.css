@@ -38,12 +38,10 @@
 
 
 .LoginPage{
-    background-color: rgb(220, 227, 255);
+    background-color: rgb(237, 242, 255);
     color: #000000;
     padding: 100px;
-    margin-left: 5%;
-    margin-right: 20%;
     border: 2px solid #c5c5c5;
     border-radius: 25px;
-    box-shadow: 20px 15px 5px #000000;
+    box-shadow: 10px 10px 5px #7a7a7a;
 }

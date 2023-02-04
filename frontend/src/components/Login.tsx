@@ -45,8 +45,8 @@ export default function Login(){
 
     return(
         <div>
-            <h2 className={"Greeting"}>Welcome to StockWatch</h2>
             <ul className={"List"}>
+            <h2 className={"Greeting"}>Welcome to StockWatch</h2>
             <h3 className={"Login"}>Login</h3>
             <form  onSubmit={handleLogin}>
                 <p><input className={"Login-Input"} type="text" placeholder={'username'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/></p>
