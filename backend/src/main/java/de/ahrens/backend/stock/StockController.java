@@ -32,12 +32,12 @@ public class StockController {
     }
 
     @PutMapping
-    public StockData changeShares(@RequestBody StockData stock, Principal principal){
-        return stockservice.addShares(stock, principal);
+    public StockData updateStock(@RequestBody StockData stockData, Principal principal){
+        return stockservice.updateStock(stockData, principal);
     }
 
     @DeleteMapping("/{id}")
-    public StockData deleteToDoById(@PathVariable String id, Principal principal){
+    public StockData deleteStockById(@PathVariable String id, Principal principal){
         return stockservice.deleteStock(id, principal);
     }
 
