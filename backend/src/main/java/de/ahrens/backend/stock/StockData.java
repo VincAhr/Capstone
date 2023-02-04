@@ -21,6 +21,7 @@ public class StockData {
     private String user;
     private String shares;
     private String date;
+    private String purchase;
 
 
 

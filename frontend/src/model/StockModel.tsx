@@ -5,4 +5,5 @@ export interface Stock {
     close: string;
     date: string;
     shares: string;
+    purchase: string;
 }
