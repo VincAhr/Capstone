@@ -2,7 +2,6 @@ import {ReactNode, useContext, useEffect, useState} from "react";
 import AuthContext from "./AuthContext";
 import {loginUser} from "../service/ApiService";
 import {useNavigate} from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
 
 export default function AuthProvider({children}:{children :ReactNode}) {
 
@@ -34,7 +33,7 @@ export default function AuthProvider({children}:{children :ReactNode}) {
     }
 
     return <AuthContext.Provider value={{token, username, login, logout, setRegister}}>
-        {register ? children : < LoginPage/>} </AuthContext.Provider>;
+        {children} </AuthContext.Provider>;
 }
 
 export const useAuth = () => useContext(AuthContext)

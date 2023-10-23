@@ -34,8 +34,9 @@ export default function LoginPage(){
                     <button className={"Login-Button"} type={'submit'}>Login</button>
                 </form>
                 <button className={"Login-Button"} onClick={() => handleRegister()}>Registration</button>
+                {error && <h2>{error}</h2>}
             </ul>
-            {error && <h2>{error}</h2>}
+
         </div>
 
     )
