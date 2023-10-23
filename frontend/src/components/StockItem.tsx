@@ -24,7 +24,7 @@ export default function StockItem (props: StockItemProps) {
     const [editMode2, setEditMode2] = useState(false)
     const [error, setError] = useState("")
     const [price, setPrice] = useState("")
-    const [newDate, setNewDate] = useState("")
+    //const [newDate, setNewDate] = useState("")
 
     useEffect(() => {
         setEditMode(false)
@@ -92,7 +92,7 @@ export default function StockItem (props: StockItemProps) {
 
             // TODO this is probably not necessary
             setPrice(updatedStock.close);
-            setNewDate(updatedStock.date);
+            //setNewDate(updatedStock.date);
         }
     }
 
