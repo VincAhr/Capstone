@@ -1,6 +1,6 @@
 import {FormEvent, useEffect, useState} from "react";
 import {registerNewUser} from "../service/ApiService";
-import "../pages/LoginPage.css"
+import "./Login.css"
 import {useAuth} from "../auth/AuthProvider";
 
 
