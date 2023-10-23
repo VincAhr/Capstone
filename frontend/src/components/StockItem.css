@@ -3,19 +3,18 @@
 
     border-radius: 5px;
     border: 2px solid #000000;
-    padding: 5px
+    padding: 5px;
+    width: 400px;
+
 }
 
 .arrow{
     height: 40px;
     width: 40px;
     float: right;
-
     margin-right: 4%;
     margin-top: 2%;
-
     border-radius: 10px;
-
 }
 
 .arrow:hover{
@@ -26,13 +25,24 @@
     height: 16px;
     width: 16px;
     margin-left: 8%;
-
     border-radius: 2px;
-
 }
 
 .edit:hover{
-    box-shadow: 2px 4px 4px 6px rgba(103, 253, 201, 0.55);
+    box-shadow: 2px 2px 2px 5px rgba(103, 253, 201, 0.55);
+    background-color: rgba(103, 253, 201, 0.5);
+}
+
+.save{
+    height: 19px;
+    width: 19px;
+    margin-left: 1px;
+    display: inline;
+    margin-bottom: -4px;
+}
+
+.save:hover{
+    box-shadow: 1px 1px 1px 1px rgba(103, 253, 201, 0.55);
     background-color: rgba(103, 253, 201, 0.5);
 }
 
@@ -58,10 +68,9 @@
     cursor: pointer;
 }
 
-
-
 .Button-Item:hover {
     background-color: #67fdc9;
+    color: red;
 }
 
 .Button-Item:active {
@@ -70,8 +79,7 @@
     animation: blinnker 1s linear infinite;
 }
 
-
-.Input-Share{
+.Input{
     width: 100px;
     margin-left: 30px;
 
@@ -82,26 +90,4 @@
 
     border-radius: 4px;
     border: 1px solid #000000;
-}
-
-.Save-Button{
-    display: inline;
-    width: 70px ;
-    background-color: rgba(195, 231, 230, 0.8);
-    color: #000000;
-
-    border-radius: 4px;
-    border: 1px solid #000000;
-
-
-    text-align: center;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-
-}
-
-.Save-Button:hover {
-    background-color: #67fdc9;
 }
