@@ -27,7 +27,6 @@ export default function StockItem (props: StockItemProps) {
     const [newDate, setNewDate] = useState("")
 
     useEffect(() => {
-        update(props.stock)
         setEditMode(false)
         setEditMode2(false)
     }, [price]);
@@ -75,26 +74,28 @@ export default function StockItem (props: StockItemProps) {
         }
     }
 
-    const RefreshDataStock = () => {
-            searchStock(props.stock.symbol, token)
-                .then(r => {
-                    setPrice(r.close)
-                    setNewDate(r.date)
-                })
+    const RefreshDataStock = async (stock: Stock) => {
+        const stockData = await searchStock(props.stock.symbol, token);
+
+        if (stockData.close && stockData.date) {
+            const updatedStock = {
+                id: stock.id,
+                symbol: stock.symbol,
+                close: stockData.close.toString(),
+                date: stockData.date.toString(),
+                shares: stock.shares,
+                purchase: stock.purchase,
+            };
+
+            await updateStock(updatedStock, token);
+            await props.getAllStocks();
+
+            // TODO this is probably not necessary
+            setPrice(updatedStock.close);
+            setNewDate(updatedStock.date);
+        }
     }
 
-    const update = (stock : Stock) => {
-        if(price.length>0 && newDate.length>0){
-        updateStock({
-            id: stock.id,
-            symbol: stock.symbol,
-            close: price.toString(),
-            date: newDate.toString(),
-            shares: stock.shares,
-            purchase: stock.purchase
-        }, token).then(() => {props.getAllStocks()}
-        )}
-    }
 
     const deleteFunction = (stock: Stock) => {
         deleteStock(stock.id, token)
@@ -116,7 +117,7 @@ export default function StockItem (props: StockItemProps) {
     return(
         <div>
                 <h4 className={"StockItem"}>
-                    <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock()}/>
+                    <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
                     <p>Name:    {props.stock.symbol}</p>
                     {price.length>1
                     ?
