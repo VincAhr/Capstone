@@ -16,7 +16,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping()
 @RequiredArgsConstructor
 public class UserController {
 
@@ -25,7 +25,7 @@ public class UserController {
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
 
-    @PostMapping
+    @PostMapping("api/user/register")
     public UserModel postNewUser(@RequestBody LoginCreationData loginCreationData) {
         if (!loginCreationData.getPassword().equals(loginCreationData.getPasswordAgain())) {
             throw new IllegalArgumentException("Passwörter müssen identisch sein, bitte wiederholen!");
@@ -34,7 +34,7 @@ public class UserController {
         return userService.createUser(loginCreationData);
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/user/login")
     public Token login(@RequestBody LoginData loginData) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
