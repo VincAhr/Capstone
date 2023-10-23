@@ -3,4 +3,5 @@ export interface AuthInterface {
     login : (username: string, password: string) => Promise<void>,
     logout: () => void,
     username: string
+    setRegister: (value: boolean) => void
 }
