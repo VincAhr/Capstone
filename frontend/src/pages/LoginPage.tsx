@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import "../components/Login.css"
+import "./Login.css"
 
 export default function LoginPage(){
     const [loginUsername, setLoginUsername] = useState('')
@@ -34,8 +34,9 @@ export default function LoginPage(){
                     <button className={"Login-Button"} type={'submit'}>Login</button>
                 </form>
                 <button className={"Login-Button"} onClick={() => handleRegister()}>Registration</button>
+                {error && <h2>{error}</h2>}
             </ul>
-            {error && <h2>{error}</h2>}
+
         </div>
 
     )
