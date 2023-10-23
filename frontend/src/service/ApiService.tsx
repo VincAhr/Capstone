@@ -2,7 +2,7 @@ import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
-    return fetch(`/api/user`, {
+    return fetch(`/api/user/register`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
