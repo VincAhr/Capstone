@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface StockRepository extends MongoRepository<StockData, String> {
+public interface StockRepository extends MongoRepository<StockDTO, String> {
 
-    public List<StockData> findAllByUser(String user);
-    public Optional<StockData> findByIdAndUser(String id, String user);
+    List<StockDTO> findAllByUser(String user);
+    Optional<StockDTO> findByIdAndUser(String id, String user);
 }

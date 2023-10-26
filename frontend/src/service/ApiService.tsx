@@ -32,8 +32,7 @@ export const searchStock = (symbol: string, token: string) => {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         }
-    })
-        .then(response => {
+    }).then(response => {
             if (response.ok) {
                 return response.json()
             } else {

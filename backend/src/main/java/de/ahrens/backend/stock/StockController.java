@@ -17,27 +17,27 @@ public class StockController {
 
 
     @GetMapping("/{symbol}")
-    public StockData getSearchForStock(@PathVariable String symbol) {
+    public StockDTO getStock(@PathVariable String symbol) {
         return stockservice.searchStock(symbol);
     }
 
     @GetMapping()
-    public List<StockData> getAllStocks(Principal principal) {
+    public List<StockDTO> getAllStocks(Principal principal) {
         return stockservice.getAllSaved(principal);
     }
 
     @PostMapping
-    public StockData postNewStock(@RequestBody StockData newStock, Principal principal){
+    public StockDTO postNewStock(@RequestBody StockDTO newStock, Principal principal){
        return stockservice.addStock(newStock, principal);
     }
 
     @PutMapping
-    public StockData updateStock(@RequestBody StockData stockData, Principal principal){
+    public StockDTO updateStock(@RequestBody StockDTO stockData, Principal principal){
         return stockservice.updateStock(stockData, principal);
     }
 
     @DeleteMapping("/{id}")
-    public StockData deleteStockById(@PathVariable String id, Principal principal){
+    public StockDTO deleteStockById(@PathVariable String id, Principal principal){
         return stockservice.deleteStock(id, principal);
     }
 

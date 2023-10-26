@@ -1,31 +1,33 @@
 package de.ahrens.backend.stock;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Stock {
+@Document(collection = "stocks")
+public class StockDTO {
 
     @Id
     private String id;
-    @JsonProperty
-    private String symbol;
-    @JsonProperty
-    private String name;
 
+    private String symbol;
+    private String name;
     private String user;
     private String shares;
     private String purchase;
+    private String close;
+    private String date;
 
-    private List<Eod> eod = new ArrayList<>();
-
+    public StockDTO(String name, String symbol, String close, String date) {
+        this.name = name;
+        this.symbol = symbol;
+        this.close = close;
+        this.date = date;
+    }
 }
