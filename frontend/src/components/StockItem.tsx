@@ -37,6 +37,7 @@ export default function StockItem (props: StockItemProps) {
             updateStock( {
                 id: stock.id,
                 symbol: stock.symbol,
+                name: stock.name,
                 close: stock.close,
                 date: stock.date,
                 shares: share,
@@ -58,6 +59,7 @@ export default function StockItem (props: StockItemProps) {
             updateStock( {
                 id: stock.id,
                 symbol: stock.symbol,
+                name: stock.name,
                 close: stock.close,
                 date: stock.date,
                 shares: stock.shares,
@@ -81,6 +83,7 @@ export default function StockItem (props: StockItemProps) {
             const updatedStock = {
                 id: stock.id,
                 symbol: stock.symbol,
+                name: stockData.name,
                 close: stockData.close.toString(),
                 date: stockData.date.toString(),
                 shares: stock.shares,
@@ -118,7 +121,8 @@ export default function StockItem (props: StockItemProps) {
         <div>
                 <h4 className={"StockItem"}>
                     <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
-                    <p>Name:    {props.stock.symbol}</p>
+                    <p>Name:    {props.stock.name}</p>
+                    <p>Symbol:    {props.stock.symbol}</p>
                     {price.length>1
                     ?
                     <p>Price:   {price}$</p>
