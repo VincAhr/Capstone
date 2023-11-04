@@ -2,6 +2,7 @@ import {FormEvent, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
+import ParticlesBackground from "./ParticlesBackground";
 
 export default function LoginPage(){
     const [loginUsername, setLoginUsername] = useState('')
@@ -25,6 +26,7 @@ export default function LoginPage(){
 
     return(
         <div>
+            <ParticlesBackground/>
             <ul className={"List"}>
                 <h2 className={"Greeting"}>Welcome to StockWatch</h2>
                 <h3 className={"Login"}>Login</h3>
@@ -36,8 +38,6 @@ export default function LoginPage(){
                 <button className={"Login-Button"} onClick={() => handleRegister()}>Registration</button>
                 {error && <h2>{error}</h2>}
             </ul>
-
         </div>
-
     )
 }
