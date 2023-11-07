@@ -32,13 +32,3 @@
 
     border: 1px solid #ffffff;
 }
-
-
-.LoginPage{
-    background-color: rgb(237, 242, 255);
-    color: #000000;
-    padding: 100px;
-    border: 2px solid #c5c5c5;
-    border-radius: 25px;
-    box-shadow: 10px 10px 5px #7a7a7a;
-}

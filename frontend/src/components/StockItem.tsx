@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import {Stock} from "../model/StockModel";
-import {deleteStock, updateStock, searchStock} from "../service/ApiService";
+import {deleteStock, updateStock, searchStock, getStock} from "../service/ApiService";
 import "./StockItem.css";
 import arrow from "../pictures/refresh_arrow_4502.png";
 import edit from "../pictures/pencil.png";
@@ -91,10 +91,10 @@ export default function StockItem (props: StockItemProps) {
             };
 
             await updateStock(updatedStock, token);
-            await props.getAllStocks();
+            await getStock(updatedStock.id, token);
 
             // TODO this is probably not necessary
-            setPrice(updatedStock.close);
+            //setPrice(updatedStock.close);
             //setNewDate(updatedStock.date);
         }
     }
