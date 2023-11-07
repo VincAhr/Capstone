@@ -12,4 +12,6 @@ public interface StockRepository extends MongoRepository<StockDTO, String> {
 
     List<StockDTO> findAllByUser(String user);
     Optional<StockDTO> findByIdAndUser(String id, String user);
+    StockDTO findStockDTOByIdAndUser(String id,String user);
+
 }

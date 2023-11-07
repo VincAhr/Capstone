@@ -40,17 +40,6 @@ public class StockService {
 
             return new StockDTO(name, symbol, close, date);
 
-
-             /*
-            JsonObject jsonObject = JsonParser.parseString(Objects.requireNonNull(response.getBody())).getAsJsonObject();
-            JsonObject data = jsonObject.getAsJsonObject("data");
-            String name = data.get("name").getAsString();
-            String symbol = data.get("symbol").getAsString();
-            String close = data.getAsJsonArray("eod").get(0).getAsJsonObject().get("close").getAsString();
-            String date = data.getAsJsonArray("eod").get(0).getAsJsonObject().get("date").getAsString();
-            return new StockData(symbol, name, close, date);
-            */
-
         } else {
             return null;
         }
@@ -75,13 +64,26 @@ public class StockService {
     }
 
     public List<StockDTO> getAllSaved(Principal principal) {
-        return stockRepository.findAllByUser(principal.getName());
+        if (!principal.getName().isBlank()) {
+            return stockRepository.findAllByUser(principal.getName());
+        } else {
+            return null;
+        }
     }
 
-    public StockDTO deleteStock(String idToDelete, Principal principal) {
+    public void deleteStock(String idToDelete, Principal principal) {
         Optional<StockDTO> stock = stockRepository.findByIdAndUser(idToDelete, principal.getName());
         StockDTO stockData = stock.orElseThrow(() -> new IllegalArgumentException("Nothing found with ID: " + idToDelete));
         stockRepository.delete(stockData);
-        return stockData;
+    }
+
+    public StockDTO getStock(String id, Principal user) throws IllegalArgumentException {
+
+        if (stockRepository.findById(id).isPresent()) {
+            return stockRepository.findStockDTOByIdAndUser(id, user.getName());
+        }
+         else {
+             throw new IllegalArgumentException("Nothing found with ID: " + id);
+         }
     }
 }

@@ -9,21 +9,26 @@ import java.security.Principal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/stock")
+@RequestMapping("/stock")
 @AllArgsConstructor
 public class StockController {
 
     private final StockService stockservice;
 
 
-    @GetMapping("/{symbol}")
-    public StockDTO getStock(@PathVariable String symbol) {
+    @GetMapping("/api/{symbol}")
+    public StockDTO getStockFromApi(@PathVariable String symbol) {
         return stockservice.searchStock(symbol);
     }
 
-    @GetMapping()
+    @GetMapping("/{id}")
+    public StockDTO getStock(@PathVariable String id, Principal principal){
+        return stockservice.getStock(id, principal);
+    }
+
+    @GetMapping("/all")
     public List<StockDTO> getAllStocks(Principal principal) {
-        return stockservice.getAllSaved(principal);
+            return stockservice.getAllSaved(principal);
     }
 
     @PostMapping
@@ -36,9 +41,9 @@ public class StockController {
         return stockservice.updateStock(stockData, principal);
     }
 
-    @DeleteMapping("/{id}")
-    public StockDTO deleteStockById(@PathVariable String id, Principal principal){
-        return stockservice.deleteStock(id, principal);
+    @DeleteMapping("/delete/{id}")
+    public void deleteStockById(@PathVariable String id, Principal principal){
+         stockservice.deleteStock(id, principal);
     }
 
 

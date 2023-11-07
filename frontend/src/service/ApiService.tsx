@@ -1,6 +1,9 @@
 import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
+const ServerNotResponding: string = "Server is not responding";
+const ApiNotResponding: string = "Server is not responding";
+
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
     return fetch(`/api/user/register`, {
         method: 'POST',
@@ -9,8 +12,13 @@ export const registerNewUser = ({username, password, passwordAgain}: RegisterDat
         },
         body: JSON.stringify({'username': username, 'password': password, 'passwordAgain': passwordAgain})
     })
-        .then(response => response.json())
-        .catch(e => console.log(e.message))
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw ServerNotResponding
+            }
+        })
 }
 
 export const loginUser = ({username, password}: LoginData) => {
@@ -20,13 +28,17 @@ export const loginUser = ({username, password}: LoginData) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({'username': username, 'password': password})
-    })
-        .then(response => response.json())
-        .catch(e => console.log(e.message))
+    }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                throw ServerNotResponding
+            }
+        })
 }
 
 export const searchStock = (symbol: string, token: string) => {
-    return fetch(`/api/stock/${symbol}`, {
+    return fetch(`/stock/api/${symbol}`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -36,24 +48,36 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw Error("API can't be reached or searched value doesn't exist")
+                throw ApiNotResponding
             }
         })
 }
 
 export const getAllStocks = (token: string) => {
-    return fetch('api/stock', {
+    return fetch('/stock/all', {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
     }).then(response => response.json())
+      .catch(e => console.log(e.message))
+}
+
+export const getStock = (id: string, token: string) => {
+    return fetch(`/stock/${id}`, {
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+    }).then(response => response.json())
+      .catch(e => console.log(e.message))
 }
 
 
 export const postNewStock = (symbol: string, close: string, date: string, shares: string, token: string) => {
-    return fetch('/api/stock', {
+    return fetch('/stock', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -67,7 +91,7 @@ export const postNewStock = (symbol: string, close: string, date: string, shares
 }
 
 export const updateStock = (stock: Stock, token: string) => {
-    return fetch(`/api/stock/`, {
+    return fetch(`/stock/`, {
         method: 'PUT',
         headers: {
             Authorization: `Bearer ${token}`,
@@ -80,7 +104,7 @@ export const updateStock = (stock: Stock, token: string) => {
 }
 
 export const deleteStock = (id: string, token: string) => {
-    return fetch(`/api/stock/${id}`,{
+    return fetch(`/stock/delete/${id}`,{
         method: 'DELETE',
         headers: {
             Authorization: `Bearer ${token}`,
