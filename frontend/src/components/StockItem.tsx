@@ -94,7 +94,7 @@ export default function StockItem (props: StockItemProps) {
             await getStock(updatedStock.id, token);
 
             // TODO this is probably not necessary
-            //setPrice(updatedStock.close);
+            setPrice(updatedStock.close);
             //setNewDate(updatedStock.date);
         }
     }
