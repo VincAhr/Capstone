@@ -40,16 +40,6 @@ public class StockService {
 
             return new StockDTO(name, symbol, close, date);
 
-             /*
-            JsonObject jsonObject = JsonParser.parseString(Objects.requireNonNull(response.getBody())).getAsJsonObject();
-            JsonObject data = jsonObject.getAsJsonObject("data");
-            String name = data.get("name").getAsString();
-            String symbol = data.get("symbol").getAsString();
-            String close = data.getAsJsonArray("eod").get(0).getAsJsonObject().get("close").getAsString();
-            String date = data.getAsJsonArray("eod").get(0).getAsJsonObject().get("date").getAsString();
-            return new StockData(symbol, name, close, date);
-            */
-
         } else {
             return null;
         }
