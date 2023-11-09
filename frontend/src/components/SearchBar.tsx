@@ -76,7 +76,6 @@ export default function SearchBar(props: SearchBarProps) {
                 </p>
             </p> : null}
             <h3>{error}</h3>
-            <h2 className={"DepotList-Banner"}> Depotlist</h2>
         </div>
     )
 }
