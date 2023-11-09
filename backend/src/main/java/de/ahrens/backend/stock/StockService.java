@@ -26,6 +26,8 @@ public class StockService {
 
         final String API_TICKER_URL = "http://api.marketstack.com/v1/tickers/" + stockSymbol + "/eod?access_key=" + pw + "&limit=1";
 
+        //final String SEARCH_NAME = "http://api.marketstack.com/v1/tickers?access_key=" + stockName + "&search=Microsoft&limit=1"
+
         try {
             ResponseEntity<StockData> response = new RestTemplate().getForEntity(API_TICKER_URL, StockData.class);
 
@@ -73,7 +75,7 @@ public class StockService {
 
     public void deleteStock(String idToDelete, Principal principal) {
         Optional<StockDTO> stock = stockRepository.findByIdAndUser(idToDelete, principal.getName());
-        StockDTO stockData = stock.orElseThrow(() -> new IllegalArgumentException("Nothing found with ID: " + idToDelete));
+        StockDTO stockData = stock.orElseThrow(() -> new IllegalArgumentException("Nothing found with Id: " + idToDelete));
         stockRepository.delete(stockData);
     }
 
@@ -83,7 +85,7 @@ public class StockService {
             return stockRepository.findStockDTOByIdAndUser(id, user.getName());
         }
          else {
-             throw new IllegalArgumentException("Nothing found with ID: " + id);
+             throw new IllegalArgumentException("Nothing found with Id: " + id);
          }
     }
 }

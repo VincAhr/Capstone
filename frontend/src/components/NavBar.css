@@ -1,43 +1,77 @@
-.NavBar-Container{
 
+.Hamburger-Menu{
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: column nowrap;
+    z-index: 10;
+}
+
+
+.Burger-Line{
+    width: 2rem;
+    height: 0.25rem;
+    border-radius: 10px;
+    background-color: black;
+    transform-origin: 1px;
+    transition: all 0.3s linear;
+}
+
+.Burger1{
+    transform: rotate(45deg);
+}
+
+.Burger2{
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.Burger3{
+    transform: rotate(-45deg);
+}
+
+.Line1{
+    transform: rotate(0);
+}
+
+.Line2{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.Line3{
+    transform: rotate(0);
+}
+
+.Navigation{
+    width: 100%;
+    height: 60px;
+}
+
+.Navigation ul{
+    display:flex;
+    flex-wrap: wrap;
+    float: left;
+    margin: 1px;
+    padding: 1px;
+    overflow: hidden;
+}
+
+.Navigation ul li{
+    list-style-type: none;
+    padding-right: 10px;
 }
 
 .NavBar-Button{
-    height: 30px;
-    width:100%;
-    max-width: 260px;
-
+    height: 25px;
+    width:100px;
+    margin-top: 5px;
+    max-width: 150px;
     font-size: 14px;
-    box-shadow: 4px 2px 3px black;
-    background-color: #b5d8d6;
-
-    border-radius: 10px;
+    background-color: rgba(195, 255, 250, 0.46);
+    border-radius: 5px;
     border: 2px solid #000000;
-
     position: relative;
     text-align: center;
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.NavBar-Button:after{
-    content: "";
-    background: #f1f1f1;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-}
-
-.NavBar-Button:active:after{
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
 }
