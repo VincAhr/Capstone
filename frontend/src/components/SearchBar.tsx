@@ -57,13 +57,16 @@ export default function SearchBar(props: SearchBarProps) {
     return (
         <div className={"Searchbar-Container"}>
             <form style={{display: "inline"}} onSubmit={getStock}>
-                <input className={"Input-Search"} type="text" placeholder={"search"} value={stock}
+                <input className={"Input-Search"} type="text" placeholder={"symbol"} value={stock}
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className={"button"} type="submit"> search</button>
             </form>
+            {price?
             <button className={"button"} style={{display: "inline"}} type="submit" onClick={postStock}>add stock
             </button>
+                : null}
             <h4>{error2}</h4>
+            {price?
             <p className={"Stock-Info"}>
                 <p className={"Symbol"}>Symbol: {symbol}</p>
                 <p className={"Symbol"}>Price: {price}</p>
@@ -71,7 +74,7 @@ export default function SearchBar(props: SearchBarProps) {
                 <p className={"Symbol"}>Shares:
                 <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"Set shares"} value={shares}  onChange={ev => setShares(ev.target.value)} />
                 </p>
-            </p>
+            </p> : null}
             <h3>{error}</h3>
             <h2 className={"DepotList-Banner"}> Depotlist</h2>
         </div>
