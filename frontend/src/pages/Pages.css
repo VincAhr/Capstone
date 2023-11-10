@@ -1,15 +1,27 @@
 .MainPage{
-
     background-color: rgb(255, 255, 255);
-    border: 3px solid #fff;
-    padding: 50px;
-    border-radius: 4px;
+    padding: 0px;
 }
 
 .Flex-Container{
     display: flex;
 }
 
+.DepotList-Banner{
+    margin-top: 80px;
+    margin-bottom: 40px;
+    color: #000000;
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #000000;
+    height: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+.Banner-Text{
+    margin: auto;
+    text-align: center;
+}
 
 .StockList-Container{
     order: 1;
@@ -29,6 +41,5 @@
     width: 100%;
     max-width: 550px;
     padding: 20px;
-
     border: 1px solid #ffffff;
 }

@@ -30,9 +30,9 @@ export default function NavBar(){
                 {BurgerMenuOpen
                 ?
                 <ul>
-                <li> <button className={"NavBar-Button"} onClick={()=> nav("/home")}>Home</button></li>
-                <li> <button className={"NavBar-Button"} >Depotlist </button></li>
-                <li> <button className={"NavBar-Button"}  onClick={auth.logout}> Logout </button></li>
+                <li> <button className={"Button"} onClick={()=> nav("/home")}>Home</button></li>
+                <li> <button className={"Button"} >Depotlist </button></li>
+                <li> <button className={"Button"} onClick={auth.logout}> Logout </button></li>
                 </ul>
                 : null
                 }

@@ -6,6 +6,7 @@ import "./StockItem.css";
 import arrow from "../pictures/refresh_arrow_4502.png";
 import edit from "../pictures/pencil.png";
 import save from "../pictures/SaveButton.png";
+import deleteIcon from "../pictures/deleteIcon.png"
 
 
 
@@ -33,7 +34,7 @@ export default function StockItem (props: StockItemProps) {
 
 
     const editShares = (stock: Stock) => {
-        if(share.length>0){
+        if(share.length){
             updateStock( {
                 id: stock.id,
                 symbol: stock.symbol,
@@ -49,13 +50,16 @@ export default function StockItem (props: StockItemProps) {
             setError("")
         }
         else{
-            setError("Shares must be greater then 0!")
             setEditMode(false)
+            setTimeout(() => {
+                    setError("")
+                }, 5000
+            )
         }
     }
 
     const editPurchase = (stock: Stock) => {
-        if(purchaseValue.length>0){
+        if(purchaseValue.length && purchaseValue.valueOf().toString() !== "0"){
             updateStock( {
                 id: stock.id,
                 symbol: stock.symbol,
@@ -70,8 +74,14 @@ export default function StockItem (props: StockItemProps) {
             setEditMode2(false)
             setError("")
         }
-        else{
+        else if(purchaseValue){
             setError("Value must be greater then 0!")
+            setEditMode2(false)
+            setTimeout(() => {
+                    setError("")
+                }, 5000
+            )
+        } else {
             setEditMode2(false)
         }
     }
@@ -121,6 +131,7 @@ export default function StockItem (props: StockItemProps) {
         <div>
                 <h4 className={"StockItem"}>
                     <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
+                    <img src={deleteIcon} alt={"who"} className={"delete-icon"} title="Delete" onClick={() => {window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)}}/>
                     <p>Name:    {props.stock.name}</p>
                     <p>Symbol:    {props.stock.symbol}</p>
                     {price.length>1
@@ -134,7 +145,7 @@ export default function StockItem (props: StockItemProps) {
                         {editMode?
                             <div style={{display: "inline"}}>
                                 <input className={"Input"} type="text" placeholder={"Shares"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <img src={(save)} alt={"what?"} className={"save"} title="Save"  onClick={() => editShares(props.stock)}/>
+                                <img src={(save)} alt={"what?"} className={"save-icon"} title="Save"  onClick={() => editShares(props.stock)}/>
                              </div>: null
                         }
                     </p>
@@ -144,12 +155,11 @@ export default function StockItem (props: StockItemProps) {
                         {editMode2?
                             <div style={{display: "inline"}}>
                                 <input className={"Input"} type="text" placeholder={"Price"} value={purchaseValue} onChange={ev => setPurchaseValue(ev.target.value)}/>
-                                <img src={(save)} alt={"what?"} className={"save"} title="Save"  onClick={() => editPurchase(props.stock)}/>
+                                <img src={(save)} alt={"what?"} className={"save-icon"} title="Save"  onClick={() => editPurchase(props.stock)}/>
                             </div>: null
                         }
                     </p>
                     <p>Profit: {profit(props.stock.purchase, props.stock.close, props.stock.shares)}$</p>
-                    <button className={"Button-Item"} onClick={() => {window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)}}> Delete stock </button>
                     <p>{error}</p>
                 </h4>
         </div>
