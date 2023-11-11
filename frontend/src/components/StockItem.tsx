@@ -25,12 +25,12 @@ export default function StockItem (props: StockItemProps) {
     const [editMode2, setEditMode2] = useState(false)
     const [error, setError] = useState("")
     const [price, setPrice] = useState("")
-    //const [newDate, setNewDate] = useState("")
+    const [newDate, setNewDate] = useState("")
 
     useEffect(() => {
         setEditMode(false)
         setEditMode2(false)
-    }, [price]);
+    }, [price, newDate]);
 
 
     const editShares = (stock: Stock) => {
@@ -99,13 +99,10 @@ export default function StockItem (props: StockItemProps) {
                 shares: stock.shares,
                 purchase: stock.purchase,
             };
-
             await updateStock(updatedStock, token);
             await getStock(updatedStock.id, token);
-
-            // TODO this is probably not necessary
-            setPrice(updatedStock.close);
-            //setNewDate(updatedStock.date);
+            setNewDate(stockData.date.toString());
+            setPrice(stockData.close.toString());
         }
     }
 
@@ -139,7 +136,10 @@ export default function StockItem (props: StockItemProps) {
                     <p>Price:   {price}$</p>
                     :
                     <p>Price:   {props.stock.close}$</p>}
-                    <p>Date:    {splitDate(props.stock.date)}</p>
+                    {newDate?
+                      <p>Date:    {splitDate(newDate)}</p>
+                    : <p>Date:    {splitDate(props.stock.date)}</p>
+                    }
                     <p>Shares:  {props.stock.shares}
                     <img src={(edit)} alt={"what?"} className={"edit"} title="Edit"  onClick={() => setEditMode(true)}/>
                         {editMode?
@@ -159,7 +159,11 @@ export default function StockItem (props: StockItemProps) {
                             </div>: null
                         }
                     </p>
+                    {props.stock.purchase
+                        ?
                     <p>Profit: {profit(props.stock.purchase, props.stock.close, props.stock.shares)}$</p>
+                        : null
+                    }
                     <p>{error}</p>
                 </h4>
         </div>

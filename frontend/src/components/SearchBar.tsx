@@ -11,6 +11,7 @@ interface SearchBarProps {
 export default function SearchBar(props: SearchBarProps) {
 
     const [stock, setStock] = useState("")
+    const[name, setName] = useState("")
     const [symbol, setSymbol] = useState("")
     const [price, setPrice] = useState("")
     const [date, setDate] = useState("")
@@ -22,9 +23,6 @@ export default function SearchBar(props: SearchBarProps) {
 
     useEffect(() => {
         setStock("")
-        setError("")
-        setDate("")
-        setShares("")
     }, [symbol])
 
     const getStock = (ev: React.FormEvent) => {
@@ -32,17 +30,19 @@ export default function SearchBar(props: SearchBarProps) {
             if(stock.length > 0) {
             searchStock(stock, token)
                 .then(r => {
+                    setName(r.name)
                     setSymbol(r.symbol)
                     setPrice(r.close)
                     setDate(r.date)
+                    setStock("")
                     setError2("")
                 })}
             else setError2("Search can't be empty")
         }
 
     const postStock = () => {
-        if (symbol.length > 0 && price.length > 0)
-            postNewStock(symbol, price, date, shares,token)
+        if (symbol.length > 0 && price.length && name.length)
+            postNewStock(symbol, name, price, date, shares, token)
                 .then(() => {
                     setPrice('')
                     setSymbol('')
@@ -57,7 +57,7 @@ export default function SearchBar(props: SearchBarProps) {
     return (
         <div className={"Searchbar-Container"}>
             <form style={{display: "inline"}} onSubmit={getStock}>
-                <input className={"Input-Search"} type="text" placeholder={"symbol"} value={stock}
+                <input className={"Input-Search"} type="text" placeholder={"Name or Symbol"} value={stock}
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className={"button"} type="submit"> search</button>
             </form>
@@ -68,8 +68,9 @@ export default function SearchBar(props: SearchBarProps) {
             <h4>{error2}</h4>
             {price?
             <p className={"Stock-Info"}>
+                <p className={"Symbol"}>Name: {name}</p>
                 <p className={"Symbol"}>Symbol: {symbol}</p>
-                <p className={"Symbol"}>Price: {price}</p>
+                <p className={"Symbol"}>Price: {price}$</p>
                 <p className={"Symbol"}>Date: {date.split("", 10)}</p>
                 <p className={"Symbol"}>Shares:
                 <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"Set shares"} value={shares}  onChange={ev => setShares(ev.target.value)} />

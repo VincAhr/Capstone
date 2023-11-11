@@ -1,5 +1,9 @@
 package de.ahrens.backend.stock;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -8,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -22,30 +27,42 @@ public class StockService {
     private final StockRepository stockRepository;
 
 
-    public StockDTO searchStock(String stockSymbol) {
+    public StockDTO searchStock(String searchInput) {
 
-        final String API_TICKER_URL = "http://api.marketstack.com/v1/tickers/" + stockSymbol + "/eod?access_key=" + pw + "&limit=1";
-
-        //final String SEARCH_NAME = "http://api.marketstack.com/v1/tickers?access_key=" + stockName + "&search=Microsoft&limit=1"
+        final String SEARCH_STOCK = "http://api.marketstack.com/v1/tickers?access_key=" + pw + "&search=" + searchInput + "&limit=1";
 
         try {
-            ResponseEntity<StockData> response = new RestTemplate().getForEntity(API_TICKER_URL, StockData.class);
 
-            if (response.getStatusCode() == HttpStatus.OK) {
+            ResponseEntity<String> response = new RestTemplate().getForEntity(SEARCH_STOCK, String.class);
 
-            Stock stock = response.getBody().getData();
+            if (response.getBody() != null && response.getStatusCode() == HttpStatus.OK) {
 
-            String name = stock.getName();
-            String symbol = stock.getSymbol();
-            String close = String.valueOf(stock.getEod().get(0).getClose());
-            String date = String.valueOf(stock.getEod().get(0).getDate());
+                JsonObject jsonObject = JsonParser.parseString(Objects.requireNonNull(response.getBody())).getAsJsonObject();
+                JsonElement data = jsonObject.getAsJsonArray("data").get(0);
+                String symbol = data.getAsJsonObject().get("symbol").getAsString();
 
-            return new StockDTO(name, symbol, close, date);
+                if (symbol != null) {
 
-        } else {
-            return null;
-        }
+                    final String API_TICKER_URL = "http://api.marketstack.com/v1/tickers/" + symbol + "/eod?access_key=" + pw + "&limit=1";
 
+                    ResponseEntity<StockData> eodResponse = new RestTemplate().getForEntity(API_TICKER_URL, StockData.class);
+
+                    if (eodResponse.getBody() != null && eodResponse.getStatusCode() == HttpStatus.OK) {
+
+                        Stock stock = eodResponse.getBody().getData();
+
+                        String name = stock.getName();
+                        String close = String.valueOf(stock.getEod().get(0).getClose());
+                        String date = String.valueOf(stock.getEod().get(0).getDate());
+
+                        return new StockDTO(name, symbol, close, date);
+
+                    } else {return null;
+                    }
+                } else {return null;
+                }
+            } else  { return null;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -66,7 +83,7 @@ public class StockService {
     }
 
     public List<StockDTO> getAllSaved(Principal principal) {
-        if (!principal.getName().isBlank()) {
+        if (principal != null &&  !principal.getName().isBlank()) {
             return stockRepository.findAllByUser(principal.getName());
         } else {
             return null;
