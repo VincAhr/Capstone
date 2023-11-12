@@ -41,7 +41,7 @@ export default function SearchBar(props: SearchBarProps) {
         }
 
     const postStock = () => {
-        if (symbol.length > 0 && price.length && name.length)
+        if (symbol.length && price.length && name.length && shares.length > 0)
             postNewStock(symbol, name, price, date, shares, token)
                 .then(() => {
                     setPrice('')
@@ -51,13 +51,13 @@ export default function SearchBar(props: SearchBarProps) {
                     setError("")
                 })
                 .then(() => props.onAddStock())
-        else setError("Not possible with empty symbol, price or date.")
+        else setError("Not possible with empty symbol, price, date or share.")
     }
 
     return (
         <div className={"Searchbar-Container"}>
             <form style={{display: "inline"}} onSubmit={getStock}>
-                <input className={"Input-Search"} type="text" placeholder={"Name or Symbol"} value={stock}
+                <input className={"Input-Search"} type="text" placeholder={"name or symbol"} value={stock}
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className={"button"} type="submit"> search</button>
             </form>
@@ -68,12 +68,12 @@ export default function SearchBar(props: SearchBarProps) {
             <h4>{error2}</h4>
             {price?
             <p className={"Stock-Info"}>
-                <p className={"Symbol"}>Name: {name}</p>
-                <p className={"Symbol"}>Symbol: {symbol}</p>
-                <p className={"Symbol"}>Price: {price}$</p>
-                <p className={"Symbol"}>Date: {date.split("", 10)}</p>
-                <p className={"Symbol"}>Shares:
-                <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"Set shares"} value={shares}  onChange={ev => setShares(ev.target.value)} />
+                <p className={"fields"}>Name: {name}</p>
+                <p className={"fields"}>Symbol: {symbol}</p>
+                <p className={"fields"}>Price: {price}$</p>
+                <p className={"fields"}>Date: {date.split("", 10)}</p>
+                <p className={"shares"}>Shares:
+                <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"set shares necessary"} value={shares}  onChange={ev => setShares(ev.target.value)} />
                 </p>
             </p> : null}
             <h3>{error}</h3>
