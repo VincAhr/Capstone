@@ -45,7 +45,7 @@ export default function MainPage(){
     }, [stocks])
 
     const createNameArray = useCallback (() => {
-        setName([...stocks.map(value => value.symbol)])
+        setName([...stocks.map(value => value.name)])
     }, [stocks])
 
     useEffect(() => {

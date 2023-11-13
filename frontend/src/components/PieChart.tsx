@@ -18,7 +18,7 @@ export function PieChart(props: PieChartProps) {
         labels: props.names,
         datasets: [
             {
-                label: '# of Votes',
+                label: 'Percentage',
                 data: props.price,
                 backgroundColor: [
                     'rgba(255,99,132,0.6)',
