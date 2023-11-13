@@ -15,13 +15,6 @@ export default function NavBar(){
     }
 
     return(
-        /*
-        <div>
-            <button className={"NavBar-Button"} onClick={()=> nav("/home")}>Home</button>
-            <button className={"NavBar-Button"}  onClick={auth.logout}> Logout </button>
-        </div>
-        */
-
         <div>
             <div className={"Navigation"}>
                 <div className={"Hamburger-Menu"} onClick={toggleBurgerMenu}>
