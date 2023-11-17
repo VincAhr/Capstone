@@ -29,44 +29,54 @@ public class StockService {
     private final StockRepository stockRepository;
 
 
-    public StockDTO searchStock(String searchInput) {
+    public StockDTO searchStock(String searchInput, String stockExchange) {
 
         final String SEARCH_STOCK = "http://api.marketstack.com/v1/tickers?access_key=" + pw + "&search=" + searchInput + "&limit=1";
 
         try {
 
-            ResponseEntity<String> response = new RestTemplate().getForEntity(SEARCH_STOCK, String.class);
+            if (!stockExchange.isEmpty()) {
+                stockExchange = ("XFRA");
+            } else { stockExchange = "";}
+
+            ResponseEntity<String> response = new RestTemplate().getForEntity(SEARCH_STOCK + "&exchange=" + stockExchange, String.class);
 
             if (response.getBody() != null && response.getStatusCode() == HttpStatus.OK) {
 
                 JsonObject jsonObject = JsonParser.parseString(Objects.requireNonNull(response.getBody())).getAsJsonObject();
-                JsonElement data = jsonObject.getAsJsonArray("data").get(0);
-                String symbol = data.getAsJsonObject().get("symbol").getAsString();
 
-                if (symbol != null) {
+                if (!jsonObject.getAsJsonArray("data").isEmpty()) {
 
-                    final String API_TICKER_URL = "http://api.marketstack.com/v1/tickers/" + symbol + "/eod?access_key=" + pw + "&limit=1";
+                    JsonElement data = jsonObject.getAsJsonArray("data").get(0);
+                    String symbol = data.getAsJsonObject().get("symbol").getAsString();
+                    //String stockExchange = data.getAsJsonObject().get("stock_exchange").getAsString();
 
-                    ResponseEntity<StockData> eodResponse = new RestTemplate().getForEntity(API_TICKER_URL, StockData.class);
+                    if (symbol != null) {
+                        final String API_TICKER_URL = "http://api.marketstack.com/v1/tickers/" + symbol + "/eod?access_key=" + pw + "&limit=1";
 
-                    if (eodResponse.getBody() != null && eodResponse.getStatusCode() == HttpStatus.OK) {
+                        ResponseEntity<StockData> eodResponse = new RestTemplate().getForEntity(API_TICKER_URL, StockData.class);
 
-                        Stock stock = eodResponse.getBody().getData();
+                        if (eodResponse.getBody() != null && eodResponse.getStatusCode() == HttpStatus.OK) {
 
-                        String name = stock.getName();
-                        if(!stock.getEod().isEmpty()) {
-                            String close = String.valueOf(stock.getEod().get(0).getClose());
-                            String date = String.valueOf(stock.getEod().get(0).getDate());
+                            Stock stock = eodResponse.getBody().getData();
 
-                            return new StockDTO(name, symbol, close, date);
+                            String name = stock.getName();
+                            if (!stock.getEod().isEmpty()) {
+                                String close = String.valueOf(stock.getEod().get(0).getClose());
+                                String date = String.valueOf(stock.getEod().get(0).getDate());
+
+                                return new StockDTO(name, symbol, close, date);
+                            } else {
+                                return new StockDTO(name, symbol, null, null);
+                            }
                         } else {
-                            return new StockDTO(name, symbol, null, null);
+                            return null;
                         }
                     } else {
                         return null;
                     }
                 } else {
-                    return null;
+                    return new StockDTO(searchInput, null, null, null);
                 }
             } else {
                 return null;
@@ -127,17 +137,20 @@ public class StockService {
                     stockDTO.setShares(String.valueOf((Arrays.stream(stock).toArray())[0]));
                     stockDTO.setName(String.valueOf((Arrays.stream(stock).toArray())[1]));
                     stockDTO.setNote(String.valueOf((Arrays.stream(stock).toArray())[2]));
+                    stockDTO.setStockExchange(String.valueOf((Arrays.stream(stock).toArray())[14]));
                     stockDTO.setPurchase(String.valueOf((Arrays.stream(stock).toArray())[15]));
 
-                    StockDTO searchStock =  searchStock(String.valueOf((Arrays.stream(stock).toArray())[1]).substring(0, 12));
+                    StockDTO searchStock =  searchStock(String.valueOf((Arrays.stream(stock).toArray())[1]).substring(0, 10), (stockDTO.getStockExchange()));
 
-                    stockDTO.setName(searchStock.getName());
-                    stockDTO.setSymbol(searchStock.getSymbol());
-                    stockDTO.setClose(searchStock.getClose());
-                    stockDTO.setDate(searchStock.getDate());
+                    if (searchStock != null) {
+                        stockDTO.setName(searchStock.getName());
+                        stockDTO.setSymbol(searchStock.getSymbol());
+                        stockDTO.setClose(searchStock.getClose());
+                        stockDTO.setDate(searchStock.getDate());
 
-                    if(stockRepository.findByNameAndUser(searchStock.getName(), principal.getName()).isEmpty()) {
-                        stockRepository.save(stockDTO);
+                        if (stockRepository.findByNameAndUser(searchStock.getName(), principal.getName()).isEmpty()) {
+                            stockRepository.save(stockDTO);
+                        }
                     }
                 }
             }

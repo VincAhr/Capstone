@@ -24,7 +24,7 @@ public class StockController {
 
     @GetMapping("/api/{symbol}")
     public StockDTO getStockFromApi(@PathVariable String symbol) {
-        return stockservice.searchStock(symbol);
+        return stockservice.searchStock(symbol, "");
     }
 
     @GetMapping("/{id}")

@@ -2,7 +2,6 @@ import {ReactNode, useContext, useEffect, useState} from "react";
 import AuthContext from "./AuthContext";
 import {loginUser} from "../service/ApiService";
 import {useNavigate} from "react-router-dom";
-import {Simulate} from "react-dom/test-utils";
 
 export default function AuthProvider({children}:{children :ReactNode}) {
 

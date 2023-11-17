@@ -24,6 +24,7 @@ public class StockDTO {
     private String close;
     private String date;
     private String note;
+    private String stockExchange;
 
 
     public StockDTO(String name, String symbol, String close, String date) {
