@@ -9,6 +9,7 @@ import {useAuth} from "../auth/AuthProvider";
 import React, {useCallback, useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
 import "./Pages.css"
+import FileUpload from "../components/FileUpload";
 
 
 
@@ -20,6 +21,7 @@ export default function MainPage(){
     const [error, setError] = useState("")
     const [price, setPrice] = useState([] as Array<number>)
     const [name, setName] = useState([] as Array<string>)
+    const [importDone, setImportDone] = useState(false)
 
 
     const getStocks = useCallback (() => {
@@ -30,7 +32,7 @@ export default function MainPage(){
 
     useEffect(() => {
         getStocks()
-    }, [token, getStocks])
+    }, [token, getStocks, importDone])
 
     const total = useCallback(() => {
         let sum = 0
@@ -63,9 +65,11 @@ export default function MainPage(){
             <h2>{error}</h2>
             <div className={"DepotList-Banner"} >
             </div>
+            <div style={{}} className={"dropzone"}>  <FileUpload importState={setImportDone}/></div>
             <div className={"Flex-Container"}>
             <div style={{order: 1}} className={"StockList-Container"}> <StockList  allStocks={stocks} value={totalValue} updateStock={getStocks}/></div>
-            <div style={{order: 2}} className={"PieChart-Container"}> <PieChart names={name} price={price} value={totalValue}/></div>
+            <div style={{order: 2}} className={"PieChart-Container"}>  <PieChart names={name} price={price} value={totalValue}/></div>
+
             </div>
             <Footer/>
         </div>

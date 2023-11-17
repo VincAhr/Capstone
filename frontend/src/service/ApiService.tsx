@@ -1,7 +1,6 @@
 import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
-const ServerNotResponding: string = "Server is not responding";
 const ApiNotResponding: string = "Server is not responding";
 
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
@@ -16,7 +15,8 @@ export const registerNewUser = ({username, password, passwordAgain}: RegisterDat
             if (response.ok) {
                 return response.json()
             } else {
-                throw ServerNotResponding
+                console.log(response.statusText)
+                throw new Error(response.statusText)
             }
         })
 }
@@ -29,12 +29,12 @@ export const loginUser = ({username, password}: LoginData) => {
         },
         body: JSON.stringify({'username': username, 'password': password})
     }).then(response => {
-            if (response.ok) {
-                return response.json()
-            } else {
-                throw ServerNotResponding
-            }
-        })
+        if (response.ok) {
+            return response.json()
+        } else {
+            throw new Error(response.statusText)
+        }
+    })
 }
 
 export const searchStock = (symbol: string, token: string) => {
@@ -48,7 +48,7 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw ApiNotResponding
+                throw new Error(ApiNotResponding)
             }
         })
 }
@@ -77,7 +77,7 @@ export const getStock = (id: string, token: string) => {
 
 
 export const postNewStock = (symbol: string, name: string ,close: string, date: string, shares: string, token: string) => {
-    return fetch('/stock', {
+    return fetch('/stock/', {
         method: 'POST',
         headers: {
             Authorization: `Bearer ${token}`,

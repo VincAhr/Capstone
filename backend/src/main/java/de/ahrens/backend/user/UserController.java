@@ -26,24 +26,24 @@ public class UserController {
     private final JwtService jwtService;
 
     @PostMapping("api/user/register")
-    public UserModel postNewUser(@RequestBody LoginCreationData loginCreationData) {
-        if (!loginCreationData.getPassword().equals(loginCreationData.getPasswordAgain())) {
-            throw new IllegalArgumentException("Passwörter müssen identisch sein, bitte wiederholen!");
-        }
-        loginCreationData.setPassword(passwordEncoder.encode(loginCreationData.getPassword()));
-        return userService.createUser(loginCreationData);
+    public UserModel postNewUser(@RequestBody LoginCreationData loginCreationData) throws ResponseStatusException {
+            if (loginCreationData.getPassword().equals(loginCreationData.getPasswordAgain())) {
+                loginCreationData.setPassword(passwordEncoder.encode(loginCreationData.getPassword()));
+                return userService.createUser(loginCreationData);
+            } else {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
     }
 
     @PostMapping("/api/user/login")
-    public Token login(@RequestBody LoginData loginData) {
+    public Token login(@RequestBody LoginData loginData) throws ResponseStatusException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
             Token token = new Token();
             token.setToken(jwtService.createToken(new HashMap<>(), loginData.getUsername()));
             return token;
-        } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid credentials");
+        } catch (ResponseStatusException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

@@ -1,9 +1,9 @@
-.Button-Refresh{
+.Button-refresh {
 
     margin-left: 4%;
     margin-bottom: 10px;
     height: 25px;
-    width:100%;
+    width:60%;
     max-width: 350px;
     font-size: 15px;
 
@@ -20,28 +20,15 @@
     cursor: pointer;
 }
 
-.Button-Refresh:after{
-    content: "";
-    background: #b4d6d5;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
+.Button-refresh:hover {
+    background-color: rgba(103, 253, 201, 0.4);
+    color: #083244;
 }
 
-.Button-Refresh:active:after{
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-}
-
-.Button-Refresh:hover {
-    background-color: #67fdc9;
+.Button-refresh:active {
+    background-color: #acefb0;
+    box-shadow: 2px 2px 5px #939393;
+    animation: blinnker 1s linear infinite;
 }
 
 .StockList{
