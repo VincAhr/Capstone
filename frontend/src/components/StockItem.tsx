@@ -121,7 +121,9 @@ export default function StockItem (props: StockItemProps) {
     }
 
     const splitDate = (date: string) => {
-        return date.split("",10)
+        if(date){
+            return date.split("",10)
+        }
     }
 
     return(

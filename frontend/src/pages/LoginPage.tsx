@@ -2,7 +2,7 @@ import {FormEvent, useState} from "react";
 import {useAuth} from "../auth/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
-import ParticlesBackground from "./ParticlesBackground";
+import ParticlesBackground from "../components/ParticlesBackground";
 
 export default function LoginPage(){
     const [loginUsername, setLoginUsername] = useState('')
@@ -18,11 +18,11 @@ export default function LoginPage(){
             .catch(e => setError(e.message))
     }
 
-    const handleRegister = () => {
+    const navigateToRegister = () => {
         auth.setRegister(true)
         navigate('/register')
-    }
 
+    }
 
     return(
         <div>
@@ -35,7 +35,7 @@ export default function LoginPage(){
                     <p><input className={"Login-Input"} type='password' placeholder={'password'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/></p>
                     <button className={"Login-Button"} type={'submit'}>Login</button>
                 </form>
-                <button className={"Login-Button"} onClick={() => handleRegister()}>Registration</button>
+                <button className={"Login-Button"} onClick={() => navigateToRegister()}>Registration</button>
                 {error && <h2>{error}</h2>}
             </ul>
         </div>

@@ -1,20 +1,22 @@
 package de.ahrens.backend.stock;
 
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.InputStreamReader;
 import java.security.Principal;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-
+import java.util.*;
 
 
 @Service
@@ -52,16 +54,22 @@ public class StockService {
                         Stock stock = eodResponse.getBody().getData();
 
                         String name = stock.getName();
-                        String close = String.valueOf(stock.getEod().get(0).getClose());
-                        String date = String.valueOf(stock.getEod().get(0).getDate());
+                        if(!stock.getEod().isEmpty()) {
+                            String close = String.valueOf(stock.getEod().get(0).getClose());
+                            String date = String.valueOf(stock.getEod().get(0).getDate());
 
-                        return new StockDTO(name, symbol, close, date);
-
-                    } else {return null;
+                            return new StockDTO(name, symbol, close, date);
+                        } else {
+                            return new StockDTO(name, symbol, null, null);
+                        }
+                    } else {
+                        return null;
                     }
-                } else {return null;
+                } else {
+                    return null;
                 }
-            } else  { return null;
+            } else {
+                return null;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,26 +91,66 @@ public class StockService {
     }
 
     public List<StockDTO> getAllSaved(Principal principal) {
-        if (principal != null &&  !principal.getName().isBlank()) {
+        if (principal != null && !principal.getName().isBlank()) {
             return stockRepository.findAllByUser(principal.getName());
         } else {
             return null;
         }
     }
 
-    public void deleteStock(String idToDelete, Principal principal) {
-        Optional<StockDTO> stock = stockRepository.findByIdAndUser(idToDelete, principal.getName());
-        StockDTO stockData = stock.orElseThrow(() -> new IllegalArgumentException("Nothing found with Id: " + idToDelete));
-        stockRepository.delete(stockData);
-    }
-
     public StockDTO getStock(String id, Principal user) throws IllegalArgumentException {
 
         if (stockRepository.findById(id).isPresent()) {
             return stockRepository.findStockDTOByIdAndUser(id, user.getName());
+        } else {
+            throw new IllegalArgumentException("Nothing found with Id: " + id);
         }
-         else {
-             throw new IllegalArgumentException("Nothing found with Id: " + id);
-         }
+    }
+
+
+    public List<String[]> saveCsvToDb(MultipartFile file, Principal principal) {
+
+        try {
+            CSVParser parser = new CSVParserBuilder().withSeparator(';').withIgnoreQuotations(true).build();
+            CSVReader csvReader = new CSVReaderBuilder(new InputStreamReader(file.getInputStream())).withCSVParser(parser).withSkipLines(1).build();
+            List<String[]> stockData = csvReader.readAll();
+
+
+            for (String[] stock : stockData) {
+
+                StockDTO stockDTO = new StockDTO();
+
+                if (stock.length > 0) {
+
+                    stockDTO.setUser(principal.getName());
+
+                    stockDTO.setShares(String.valueOf((Arrays.stream(stock).toArray())[0]));
+                    stockDTO.setName(String.valueOf((Arrays.stream(stock).toArray())[1]));
+                    stockDTO.setNote(String.valueOf((Arrays.stream(stock).toArray())[2]));
+                    stockDTO.setPurchase(String.valueOf((Arrays.stream(stock).toArray())[15]));
+
+                    StockDTO searchStock =  searchStock(String.valueOf((Arrays.stream(stock).toArray())[1]).substring(0, 12));
+
+                    stockDTO.setName(searchStock.getName());
+                    stockDTO.setSymbol(searchStock.getSymbol());
+                    stockDTO.setClose(searchStock.getClose());
+                    stockDTO.setDate(searchStock.getDate());
+
+                    if(stockRepository.findByNameAndUser(searchStock.getName(), principal.getName()).isEmpty()) {
+                        stockRepository.save(stockDTO);
+                    }
+                }
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void deleteStock(String idToDelete, Principal principal) {
+        Optional<StockDTO> stock = stockRepository.findByIdAndUser(idToDelete, principal.getName());
+        StockDTO stockData = stock.orElseThrow(() -> new IllegalArgumentException("Nothing found with Id: " + idToDelete));
+        stockRepository.delete(stockData);
     }
 }

@@ -12,12 +12,14 @@ interface StockListProps {
 
 export default function StockList(props: StockListProps) {
 
-    //<button className={"Button-Refresh"} onClick={() => props.updateStock()}> Refresh list </button>
+
 
     return(
         <div>
             <h4 className={"StockList"}>
-            {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} getAllStocks={props.updateStock}/>)}
+                {props.allStocks.length}
+                <button className={"Button-refresh"} onClick={() => props.updateStock()}> Refresh list </button>
+                {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} getAllStocks={props.updateStock}/>)}
             </h4>
         </div>
     )

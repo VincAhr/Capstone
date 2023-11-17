@@ -44,3 +44,16 @@
     padding: 20px;
     border: 1px solid #ffffff;
 }
+
+.dropzone{
+    margin-top: 25px;
+    margin-left: 40px;
+    margin-right: 50px;
+
+    text-align: center;
+
+    height: 150px;
+    padding: 10px;
+    border-radius: 1px;
+    border: 1px solid rgba(0, 0, 0, 0.27);
+}

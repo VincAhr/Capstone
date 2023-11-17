@@ -1,7 +1,7 @@
 import {FormEvent, useEffect, useState} from "react";
-import {useAuth} from "../auth/AuthProvider";
 import {registerNewUser} from "../service/ApiService";
 import "./Login.css"
+import ParticlesBackground from "../components/ParticlesBackground";
 
 
 export default function RegisterPage(){
@@ -10,8 +10,6 @@ export default function RegisterPage(){
     const [registerPasswordOne, setRegisterPasswordOne] = useState('')
     const [registerPasswordTwo, setRegisterPasswordTwo] = useState('')
     const [error, setError] = useState('')
-
-    const auth = useAuth()
 
     useEffect( () => {
         setRegisterPasswordTwo("")
@@ -23,21 +21,26 @@ export default function RegisterPage(){
     const handleRegister = (event : FormEvent) => {
         event.preventDefault()
         setError('')
-        if (!(registerPasswordOne===registerPasswordTwo)){
-            setError('Passwörter nicht gleich')
+        if (!registerPasswordOne  || !registerPasswordTwo){
+            setError('Password must be set in both fields')
+        } else if (!(registerPasswordOne===registerPasswordTwo)) {
+            setError('Passwords are not equal')
         } else {
             registerNewUser({username: registerUsername, password: registerPasswordOne, passwordAgain: registerPasswordTwo})
-                .catch(e => setError(e.message))
-            setRegisterPasswordTwo("")
-            setRegisterPasswordOne("")
-            setRegisterUsername("")
-            auth.setRegister(false)
+            .catch(e => setError(e.message))
         }
+        setRegisterPasswordTwo("")
+        setRegisterPasswordOne("")
+        setRegisterUsername("")
+        setTimeout(() => {
+            setError("")
+        }, 8000)
     }
 
 
     return(
         <div>
+            <ParticlesBackground/>
             <ul className={"List"}>
                 <h2 className={"Greeting"}>Welcome to StockWatch</h2>
                 <h3 className={"Register"} >Registration</h3>
@@ -49,7 +52,7 @@ export default function RegisterPage(){
                 </form>
             </ul>
 
-            {error && <h2>{error}</h2>}
+            <h2 className={"error"}>{error}</h2>
         </div>
 
     )
