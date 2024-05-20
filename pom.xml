@@ -9,9 +9,9 @@
 		<relativePath/>
 	</parent>
 	<groupId>com.gitHub.VincAhr</groupId>
-	<artifactId>capstone-parent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>capstone</name>
+	<artifactId>parent</artifactId>
+	<version>0.0.1</version>
+	<name>Test</name>
 	<packaging>pom</packaging>
 	
 	<properties>
