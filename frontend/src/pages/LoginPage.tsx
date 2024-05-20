@@ -31,11 +31,11 @@ export default function LoginPage(){
                 <h2 className={"Greeting"}>Welcome to StockWatch</h2>
                 <h3 className={"Login"}>Login</h3>
                 <form  onSubmit={handleLogin}>
-                    <p><input className={"Login-Input"} type="text" placeholder={'username'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/></p>
-                    <p><input className={"Login-Input"} type='password' placeholder={'password'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/></p>
-                    <button className={"Login-Button"} type={'submit'}>Login</button>
+                    <p><input className={"login-input"} type="text" placeholder={'username'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/></p>
+                    <p><input className={"login-input"} type='password' placeholder={'password'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/></p>
+                    <button className={"login-button"} type={'submit'}>Login</button>
                 </form>
-                <button className={"Login-Button"} onClick={() => handleRegister()}>Registration</button>
+                <button className={"login-button"} onClick={() => handleRegister()}>Registration</button>
                 {error && <h2>{error}</h2>}
             </ul>
         </div>
