@@ -5,7 +5,6 @@ import "./StockList.css"
 
 interface StockListProps {
     allStocks: Array<Stock>
-    value: number
     updateStock: () => void
 }
 
@@ -17,7 +16,7 @@ export default function StockList(props: StockListProps) {
     return(
         <div>
             <h4>
-            {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} getAllStocks={props.updateStock}/>)}
+            {props.allStocks.map(stock => <StockItem key={stock.id} stock={stock} getAllStocks={props.updateStock}/>)}
             </h4>
         </div>
     )
