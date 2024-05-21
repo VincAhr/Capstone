@@ -9,14 +9,14 @@ interface StockListProps {
     updateStock: () => void
 }
 
-
 export default function StockList(props: StockListProps) {
 
+    // Fallback when new implemented functionality not working as expected
     //<button className={"Button-Refresh"} onClick={() => props.updateStock()}> Refresh list </button>
 
     return(
         <div>
-            <h4 className={"StockList"}>
+            <h4>
             {props.allStocks.map(stock => <StockItem stock={stock} value={props.value} getAllStocks={props.updateStock}/>)}
             </h4>
         </div>

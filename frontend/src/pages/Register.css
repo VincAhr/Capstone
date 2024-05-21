@@ -1,4 +1,13 @@
-.Register{
+.greeting{
+    text-align: center;
+    margin-bottom: 8%;
+    margin-top: 10%;
+}
+.list{
+    text-align: center;
+    list-style: inside;
+}
+.register{
     text-align: center;
     list-style: inside;
     margin-top: 5%;
@@ -17,7 +26,7 @@
     border-radius: 10px;
     border: 2px solid rgba(0, 0, 0, 0.7);
 }
-.Register-Button{
+.register-button{
     height: 35px;
     width:100%;
     max-width: 260px;
@@ -31,7 +40,7 @@
     background-color: rgba(205, 209, 239, 0.59);
     border: 2px solid #a4afd3;
 }
-.Register-Button:hover{
+.register-button:hover{
     background-color: rgba(112, 133, 215, 0.58); ;
     cursor: pointer;
     border: none;

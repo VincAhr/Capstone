@@ -27,10 +27,10 @@ export default function LoginPage(){
     return(
         <div>
             <ParticlesBackground/>
-            <ul className={"List"}>
-                <h2 className={"Greeting"}>Welcome to StockWatch</h2>
-                <h3 className={"Login"}>Login</h3>
-                <form  onSubmit={handleLogin}>
+            <ul className={"list"}>
+                <h2 className={"greeting"}>Welcome to StockWatch</h2>
+                <h3 className={"login"}>Login</h3>
+                <form onSubmit={handleLogin}>
                     <p><input className={"login-input"} type="text" placeholder={'username'} value={loginUsername} onChange={ev => setLoginUsername(ev.target.value)}/></p>
                     <p><input className={"login-input"} type='password' placeholder={'password'} value={loginPassword} onChange={ev => setLoginPassword(ev.target.value)}/></p>
                     <button className={"login-button"} type={'submit'}>Login</button>

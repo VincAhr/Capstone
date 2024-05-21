@@ -1,13 +1,11 @@
-.MainPage{
+.mainPage{
     background-color: rgb(255, 255, 255);
-    padding: 0px;
+    padding: 0;
 }
-
-.Flex-Container{
+.flex-container{
     display: flex;
 }
-
-.DepotList-Banner{
+.depotList-banner{
     margin-top: 80px;
     margin-bottom: 40px;
     color: #000000;
@@ -17,13 +15,11 @@
     height: 4px;
     background-color: rgb(255, 255, 255);
 }
-
-.Banner-Text{
+.banner-text{
     margin: auto;
     text-align: center;
 }
-
-.StockList-Container{
+.stockList-container{
     order: 1;
     margin-top: 25px;
     margin-left: 40px;
@@ -33,8 +29,7 @@
     padding: 10px;
     border: 1px solid #ffffff;
 }
-
-.PieChart-Container{
+.pieChart-container{
     order: 2;
     margin-top: 25px;
     margin-left: 200px;
