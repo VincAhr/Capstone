@@ -1,8 +1,8 @@
-.Searchbar-Container{
+.searchbar-container{
     margin-left: 45px;
 }
 
-.Input-Search{
+.input-search{
     margin-left: 10px;
     border-radius: 5px;
     border: 1px solid #000000;
@@ -21,6 +21,7 @@
     margin-left: 3px;
     border-radius: 5px;
     border: 1px solid #000000;
+    display: inline;
 }
 
 .button:hover {
@@ -35,7 +36,7 @@
     color : #666600;
 }
 
-.Stock-Info{
+.stock-info{
     border-radius: 2px;
     border: 2px solid #000000;;
     height: 225px;
@@ -59,7 +60,7 @@
     text-align: justify-all;
 }
 
-.Shares-Input{
+.shares-input{
     text-align: left;
     color: #000066;
     width: 175px;
@@ -68,9 +69,10 @@
     border: 2px solid #000000;
     height: 20px;
     font-size: 14px;
+    display: inline;
 }
 
-.Shares-Input::placeholder{
+.shares-input::placeholder{
     color: rgba(0, 0, 0, 0.45);
     text-align: center;
     opacity: 0.75;

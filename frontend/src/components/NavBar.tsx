@@ -16,22 +16,20 @@ export default function NavBar(){
 
     return(
         <div>
-            <div className={"Navigation"}>
-                <div className={"Hamburger-Menu"} onClick={toggleBurgerMenu}>
+            <div className={"navigation"}>
+                <div className={"hamburger-menu"} onClick={toggleBurgerMenu}>
                     <BurgerMenu isOpen={BurgerMenuOpen}/>
                 </div>
                 {BurgerMenuOpen
                 ?
                 <ul>
-                <li> <button className={"Button"} onClick={()=> nav("/home")}>Home</button></li>
-                <li> <button className={"Button"} >Depotlist </button></li>
-                <li> <button className={"Button"} onClick={auth.logout}> Logout </button></li>
+                <li> <button className={"button"} onClick={()=> nav("/home")}>Home</button></li>
+                <li> <button className={"button"} >Depotlist </button></li>
+                <li> <button className={"button"} onClick={auth.logout}> Logout </button></li>
                 </ul>
                 : null
                 }
             </div>
         </div>
-
-
     )
 }

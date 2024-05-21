@@ -38,14 +38,14 @@ export default function RegisterPage(){
 
     return(
         <div>
-            <ul className={"List"}>
-                <h2 className={"Greeting"}>Welcome to StockWatch</h2>
-                <h3 className={"Register"} >Registration</h3>
-                <form style={{display: "block"}} onSubmit={handleRegister}>
+            <ul className={"list"}>
+                <h2 className={"greeting"}>Welcome to StockWatch</h2>
+                <h3 className={"register"} >Registration</h3>
+                <form onSubmit={handleRegister}>
                     <p><input className={"register-input"} type="text" placeholder={'username'} value={registerUsername} onChange={ev => setRegisterUsername(ev.target.value)}/></p>
                     <p><input className={"register-input"} type='password' placeholder={'password'} value={registerPasswordOne} onChange={ev => setRegisterPasswordOne(ev.target.value)}/></p>
                     <p><input className={"register-input"} type='password' placeholder={'password again'} value={registerPasswordTwo} onChange={ev => setRegisterPasswordTwo(ev.target.value)}/></p>
-                    <button className={"Register-Button"} type={'submit'}>Registration</button>
+                    <button className={"register-button"} type={'submit'}>Registration</button>
                 </form>
             </ul>
 

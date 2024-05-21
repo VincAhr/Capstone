@@ -9,7 +9,6 @@ import save from "../pictures/SaveButton.png";
 import deleteIcon from "../pictures/deleteIcon.png"
 
 
-
 interface  StockItemProps {
     stock: Stock
     value: number
@@ -126,9 +125,9 @@ export default function StockItem (props: StockItemProps) {
 
     return(
         <div>
-                <h4 className={"StockItem"}>
-                    <img src={(arrow)} alt={"what?"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
-                    <img src={deleteIcon} alt={"who"} className={"delete-icon"} title="Delete" onClick={() => {window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)}}/>
+                <h4 className={"stock-item"}>
+                    <img src={(arrow)} alt={"not working"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
+                    <img src={deleteIcon} alt={"not working"} className={"delete-icon"} title="Delete" onClick={() => {window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)}}/>
                     <p>Name:    {props.stock.name}</p>
                     <p>Symbol:    {props.stock.symbol}</p>
                     {price.length>1
@@ -141,21 +140,21 @@ export default function StockItem (props: StockItemProps) {
                     : <p>Date:    {splitDate(props.stock.date)}</p>
                     }
                     <p>Shares:  {props.stock.shares}
-                    <img src={(edit)} alt={"what?"} className={"edit"} title="Edit"  onClick={() => setEditMode(true)}/>
+                    <img src={(edit)} alt={"not working"} className={"edit"} title="Edit"  onClick={() => setEditMode(true)}/>
                         {editMode?
-                            <div style={{display: "inline"}}>
-                                <input className={"Input"} type="text" placeholder={"Shares"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <img src={(save)} alt={"what?"} className={"save-icon"} title="Save"  onClick={() => editShares(props.stock)}/>
+                            <div className={"edit-mode"}>
+                                <input className={"input"} type="text" placeholder={"Shares"} value={share} onChange={ev => setShare(ev.target.value)}/>
+                                <img src={(save)} alt={"not working"} className={"save-icon"} title="Save"  onClick={() => editShares(props.stock)}/>
                              </div>: null
                         }
                     </p>
                     <p>Value to date:   {product(props.stock.close, props.stock.shares)}$</p>
                     <p>Value of purchase:  {props.stock.purchase}$
-                        <img src={(edit)} alt={"what?"} className={"edit"} title="Edit"  onClick={() => setEditMode2(true)}/>
+                        <img src={(edit)} alt={"not working"} className={"edit"} title="Edit"  onClick={() => setEditMode2(true)}/>
                         {editMode2?
-                            <div style={{display: "inline"}}>
-                                <input className={"Input"} type="text" placeholder={"Price"} value={purchaseValue} onChange={ev => setPurchaseValue(ev.target.value)}/>
-                                <img src={(save)} alt={"what?"} className={"save-icon"} title="Save"  onClick={() => editPurchase(props.stock)}/>
+                            <div className={"edit-mode"}>
+                                <input className={"input"} type="text" placeholder={"Price"} value={purchaseValue} onChange={ev => setPurchaseValue(ev.target.value)}/>
+                                <img src={(save)} alt={"not working"} className={"save-icon"} title="Save"  onClick={() => editPurchase(props.stock)}/>
                             </div>: null
                         }
                     </p>

@@ -4,6 +4,6 @@ This is an application where you can add stocks that are listed in the New York 
 
 ## Picture of the MainPage
 
-<img src="frontend/src/pictures/Mainpage.png">
+<img src="frontend/src/pictures/Mainpage.png" alt="not working">
 
 

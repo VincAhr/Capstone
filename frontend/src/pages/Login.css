@@ -1,14 +1,14 @@
-.Greeting{
+.greeting{
     text-align: center;
     margin-bottom: 8%;
     margin-top: 10%;
 }
-.List{
+.list{
     margin: auto;
     text-align: center;
     list-style: inside;
 }
-.Login{
+.login{
     text-align: center;
     list-style: inside;
 }

@@ -7,7 +7,6 @@ interface SearchBarProps {
     onAddStock: () => void;
 }
 
-
 export default function SearchBar(props: SearchBarProps) {
 
     const [stock, setStock] = useState("")
@@ -55,25 +54,25 @@ export default function SearchBar(props: SearchBarProps) {
     }
 
     return (
-        <div className={"Searchbar-Container"}>
+        <div className={"searchbar-container"}>
             <form style={{display: "inline"}} onSubmit={getStock}>
-                <input className={"Input-Search"} type="text" placeholder={"name or symbol"} value={stock}
+                <input className={"input-search"} type="text" placeholder={"name or symbol"} value={stock}
                        onChange={ev => setStock(ev.target.value)}/>
                 <button className={"button"} type="submit"> search</button>
             </form>
             {price?
-            <button className={"button"} style={{display: "inline"}} type="submit" onClick={postStock}>add stock
+            <button className={"button"} type="submit" onClick={postStock}>add stock
             </button>
                 : null}
             <h4>{error2}</h4>
             {price?
-            <p className={"Stock-Info"}>
+            <p className={"stock-info"}>
                 <p className={"fields"}>Name: {name}</p>
                 <p className={"fields"}>Symbol: {symbol}</p>
                 <p className={"fields"}>Price: {price}$</p>
                 <p className={"fields"}>Date: {date.split("", 10)}</p>
                 <p className={"shares"}>Shares:
-                <input style={{display: "inline"}} className={"Shares-Input"} type="text" placeholder={"set shares necessary"} value={shares}  onChange={ev => setShares(ev.target.value)} />
+                <input className={"shares-input"} type="text" placeholder={"set shares necessary"} value={shares}  onChange={ev => setShares(ev.target.value)} />
                 </p>
             </p> : null}
             <h3>{error}</h3>

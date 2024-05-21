@@ -42,10 +42,9 @@ export function PieChart(props: PieChartProps) {
     };
 
     return  (
-        <div className={"Pie-Chart"}>
+        <div className={"pie-chart"}>
             <  Pie data={data} />
-        <h2 className={"Total-Value"}><p>Total value: {props.value.toFixed(2)}$</p></h2>
+        <h2 className={"total-value"}><p>Total value: {props.value.toFixed(2)}$</p></h2>
         </div>
-        )
-
+    )
 }

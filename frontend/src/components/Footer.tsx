@@ -2,19 +2,14 @@ import "./Footer.css";
 import logo from "../pictures/NYSE.jpg";
 
 
-
-
-
 export default function Footer () {
 
 
-
     return(
-        <div className={"Footer-Container"} >
-            <h1 className={"Footer-Content"}>
-                <img src={(logo)} alt={"huh?"} className={"Footer-Button"}   onClick={() => window.open("https://www.nyse.com/listings_directory/stock")}/>
+        <div className={"footer-container"} >
+            <h1 className={"footer-content"}>
+                <img src={(logo)} alt={"not working"} className={"footer-button"}   onClick={() => window.open("https://www.nyse.com/listings_directory/stock")}/>
             </h1>
         </div>
     )
-
 }
