@@ -14,12 +14,12 @@ import "./Pages.css"
 
 export default function MainPage(){
 
-    const {token} = useAuth()
     const [stocks, setStocks] = useState([] as Array<Stock>)
     const [totalValue, setTotalValue] = useState(0)
     const [error, setError] = useState("")
     const [price, setPrice] = useState([] as Array<number>)
     const [name, setName] = useState([] as Array<string>)
+    const {token} = useAuth()
 
 
     const getStocks = useCallback (() => {
@@ -64,7 +64,7 @@ export default function MainPage(){
             <div className={"depotList-banner"} >
             </div>
             <div className={"flex-container"}>
-            <div style={{order: 1}} className={"stockList-container"}> <StockList  allStocks={stocks} value={totalValue} updateStock={getStocks}/></div>
+            <div style={{order: 1}} className={"stockList-container"}> <StockList  allStocks={stocks} updateStock={getStocks}/></div>
             <div style={{order: 2}} className={"pieChart-container"}> <PieChart names={name} price={price} value={totalValue}/></div>
             </div>
             <Footer/>

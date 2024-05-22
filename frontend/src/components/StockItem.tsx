@@ -11,7 +11,6 @@ import deleteIcon from "../pictures/deleteIcon.png"
 
 interface  StockItemProps {
     stock: Stock
-    value: number
     getAllStocks: () => void
 }
 
@@ -25,6 +24,7 @@ export default function StockItem (props: StockItemProps) {
     const [error, setError] = useState("")
     const [price, setPrice] = useState("")
     const [newDate, setNewDate] = useState("")
+    const [newValueToDate, setNewValueToDate] = useState("")
 
     useEffect(() => {
         setEditMode(false)
@@ -102,6 +102,7 @@ export default function StockItem (props: StockItemProps) {
             await getStock(updatedStock.id, token);
             setNewDate(stockData.date.toString());
             setPrice(stockData.close.toString());
+            setNewValueToDate((parseFloat(stockData.close.toString()) * parseFloat(stock.shares)).toFixed(2));
         }
     }
 
@@ -123,48 +124,56 @@ export default function StockItem (props: StockItemProps) {
         return date.split("",10)
     }
 
-    return(
+    return (
         <div>
-                <h4 className={"stock-item"}>
-                    <img src={(arrow)} alt={"not working"} className={"arrow"} title="Refresh"  onClick={() => RefreshDataStock(props.stock)}/>
-                    <img src={deleteIcon} alt={"not working"} className={"delete-icon"} title="Delete" onClick={() => {window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)}}/>
-                    <p>Name:    {props.stock.name}</p>
-                    <p>Symbol:    {props.stock.symbol}</p>
-                    {price.length>1
+            <h4 className={"stock-item"}>
+                <img src={(arrow)} alt={"not working"} className={"arrow"} title="Refresh"
+                     onClick={() => RefreshDataStock(props.stock)}/>
+                <img src={deleteIcon} alt={"not working"} className={"delete-icon"} title="Delete" onClick={() => {
+                    window.confirm('Are you sure you want to delete this?') && deleteFunction(props.stock)
+                }}/>
+                <p>Name: {props.stock.name}</p>
+                <p>Symbol: {props.stock.symbol}</p>
+                {price.length > 1
                     ?
-                    <p>Price:   {price}$</p>
+                    <p>Price: {price}$</p>
                     :
-                    <p>Price:   {props.stock.close}$</p>}
-                    {newDate?
-                      <p>Date:    {splitDate(newDate)}</p>
-                    : <p>Date:    {splitDate(props.stock.date)}</p>
+                    <p>Price: {props.stock.close}$</p>}
+                {newDate ?
+                    <p>Date: {splitDate(newDate)}</p>
+                    : <p>Date: {splitDate(props.stock.date)}</p>
+                }
+                <p>Shares: {props.stock.shares}
+                    <img src={(edit)} alt={"edit"} className={"edit"} title="edit" onClick={() => setEditMode(true)}/>
+                    {editMode ?
+                        <div className={"edit-mode"}>
+                            <input className={"input"} type="text" placeholder={"Shares"} value={share}
+                                   onChange={ev => setShare(ev.target.value)}/>
+                            <img src={(save)} alt={"save"} className={"save-icon"} title="save"
+                                 onClick={() => editShares(props.stock)}/>
+                        </div> : null
                     }
-                    <p>Shares:  {props.stock.shares}
-                    <img src={(edit)} alt={"not working"} className={"edit"} title="Edit"  onClick={() => setEditMode(true)}/>
-                        {editMode?
-                            <div className={"edit-mode"}>
-                                <input className={"input"} type="text" placeholder={"Shares"} value={share} onChange={ev => setShare(ev.target.value)}/>
-                                <img src={(save)} alt={"not working"} className={"save-icon"} title="Save"  onClick={() => editShares(props.stock)}/>
-                             </div>: null
-                        }
-                    </p>
-                    <p>Value to date:   {product(props.stock.close, props.stock.shares)}$</p>
-                    <p>Value of purchase:  {props.stock.purchase}$
-                        <img src={(edit)} alt={"not working"} className={"edit"} title="Edit"  onClick={() => setEditMode2(true)}/>
-                        {editMode2?
-                            <div className={"edit-mode"}>
-                                <input className={"input"} type="text" placeholder={"Price"} value={purchaseValue} onChange={ev => setPurchaseValue(ev.target.value)}/>
-                                <img src={(save)} alt={"not working"} className={"save-icon"} title="Save"  onClick={() => editPurchase(props.stock)}/>
-                            </div>: null
-                        }
-                    </p>
-                    {props.stock.purchase
-                        ?
+                </p>
+                {newValueToDate.length > 1 ? <p>Value to date: {newValueToDate}</p>
+                    : <p>{product(props.stock.close, props.stock.shares)}$</p>}
+                <p>Value of purchase: {props.stock.purchase}$
+                    <img src={(edit)} alt={"edit"} className={"edit"} title="edit" onClick={() => setEditMode2(true)}/>
+                    {editMode2 ?
+                        <div className={"edit-mode"}>
+                            <input className={"input"} type="text" placeholder={"Price"} value={purchaseValue}
+                                   onChange={ev => setPurchaseValue(ev.target.value)}/>
+                            <img src={(save)} alt={"save"} className={"save-icon"} title="save"
+                                 onClick={() => editPurchase(props.stock)}/>
+                        </div> : null
+                    }
+                </p>
+                {props.stock.purchase
+                    ?
                     <p>Profit: {profit(props.stock.purchase, props.stock.close, props.stock.shares)}$</p>
-                        : null
-                    }
-                    <p>{error}</p>
-                </h4>
+                    : null
+                }
+                <p>{error}</p>
+            </h4>
         </div>
     )
 }

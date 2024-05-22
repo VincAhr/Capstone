@@ -1,7 +1,6 @@
 import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
-const ServerNotResponding: string = "Server is not responding";
 const ApiNotResponding: string = "Server is not responding";
 
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
@@ -16,7 +15,8 @@ export const registerNewUser = ({username, password, passwordAgain}: RegisterDat
             if (response.ok) {
                 return response.json()
             } else {
-                throw ServerNotResponding
+                console.log(response.status, response.statusText)
+                throw new Error(response.statusText + " " + response.status.toString())
             }
         })
 }
@@ -32,7 +32,8 @@ export const loginUser = ({username, password}: LoginData) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw ServerNotResponding
+                console.log(response.status, response.statusText)
+                throw new Error(response.statusText + " " + response.status.toString())
             }
         })
 }
@@ -48,7 +49,7 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw ApiNotResponding
+                throw new Error(ApiNotResponding)
             }
         })
 }
