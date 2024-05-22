@@ -8,7 +8,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 interface PieChartProps {
     names: Array<string>
     price: Array<number>
-    value: number
+    totalValue: number
 }
 
 export function PieChart(props: PieChartProps) {
@@ -44,7 +44,7 @@ export function PieChart(props: PieChartProps) {
     return  (
         <div className={"pie-chart"}>
             <  Pie data={data} />
-        <h2 className={"total-value"}><p>Total value: {props.value.toFixed(2)}$</p></h2>
+        <h2 className={"total-value"}><p>Total value: {props.totalValue.toFixed(2)}$</p></h2>
         </div>
     )
 }

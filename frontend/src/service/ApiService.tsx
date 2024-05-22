@@ -54,26 +54,38 @@ export const searchStock = (symbol: string, token: string) => {
         })
 }
 
-export const getAllStocks = (token: string) => {
-    return fetch('/stock/all', {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    }).then(response => response.json())
-      .catch(e => console.log(e.message))
+export const getAllStocks = async (token: string) => {
+    try {
+        const response = await fetch('/stock/all', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
+        if(response.json !== undefined){
+            return response.json();
+        }
+    } catch (e) {
+        console.log(e);
+    }
 }
 
-export const getStock = (id: string, token: string) => {
-    return fetch(`/stock/${id}`, {
-        method: 'GET',
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-    }).then(response => response.json())
-      .catch(e => console.log(e.message))
+export const getStock = async (id: string, token: string) => {
+    try {
+        const response = await fetch(`/stock/${id}`, {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+        });
+        if(response.json !== undefined){
+            return response.json();
+        }
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 

@@ -10,8 +10,6 @@ import React, {useCallback, useEffect, useState} from "react";
 import {Stock} from "../model/StockModel";
 import "./Pages.css"
 
-
-
 export default function MainPage(){
 
     const [stocks, setStocks] = useState([] as Array<Stock>)
@@ -21,6 +19,21 @@ export default function MainPage(){
     const [name, setName] = useState([] as Array<string>)
     const {token} = useAuth()
 
+    const creatPriceArray = useCallback (() => {
+        setPrice([...stocks.map(value => parseFloat((parseFloat(value.close)*parseFloat(value.shares)).toFixed(2)))])
+
+    }, [stocks])
+
+    const createNameArray = useCallback (() => {
+        setName([...stocks.map(value => value.name)])
+    }, [stocks])
+
+    const total = useCallback(() => {
+        let sum = 0
+        for (let i = 0; i < stocks.length; i++) {
+            sum += (parseFloat(stocks[i].close) * parseFloat(stocks[i].shares))
+        } setTotalValue(sum)
+    }, [stocks])
 
     const getStocks = useCallback (() => {
         getAllStocks(token)
@@ -30,23 +43,7 @@ export default function MainPage(){
 
     useEffect(() => {
         getStocks()
-    }, [token, getStocks])
-
-    const total = useCallback(() => {
-        let sum = 0
-        for (let i = 0; i < stocks.length; i++) {
-            sum += (parseFloat(stocks[i].close) * parseFloat(stocks[i].shares))
-        } setTotalValue(sum)
-    }, [stocks])
-
-    const creatPriceArray = useCallback (() => {
-        setPrice([...stocks.map(value => parseFloat((parseFloat(value.close)*parseFloat(value.shares)).toFixed(2)))])
-
-    }, [stocks])
-
-    const createNameArray = useCallback (() => {
-        setName([...stocks.map(value => value.name)])
-    }, [stocks])
+    }, [getStocks, token])
 
     useEffect(() => {
         total()
@@ -65,7 +62,7 @@ export default function MainPage(){
             </div>
             <div className={"flex-container"}>
             <div style={{order: 1}} className={"stockList-container"}> <StockList  allStocks={stocks} updateStock={getStocks}/></div>
-            <div style={{order: 2}} className={"pieChart-container"}> <PieChart names={name} price={price} value={totalValue}/></div>
+            <div style={{order: 2}} className={"pieChart-container"}> <PieChart names={name} price={price} totalValue={totalValue}/></div>
             </div>
             <Footer/>
         </div>
