@@ -15,10 +15,12 @@ export default function StockList(props: StockListProps) {
 
     return(
         <div>
+            {props.allStocks !== undefined ?
             <h4>
-            <p>Total stocks   {props.allStocks.length.toString()}</p>
-            {props.allStocks.map(stock => <StockItem key={stock.id} stock={stock} getAllStocks={props.updateStock}/>)}
-            </h4>
+                <p>Total stocks   {props.allStocks.length.toString()}</p>
+                {props.allStocks.map(stock => <StockItem key={stock.id} stock={stock} getAllStocks={props.updateStock}/>)}
+             </h4>
+                : null}
         </div>
     )
 }

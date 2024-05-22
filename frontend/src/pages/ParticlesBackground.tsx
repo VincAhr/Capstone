@@ -8,13 +8,13 @@ import { loadSlim } from "tsparticles-slim";
 export default function ParticlesBackground () {
 
     const particlesInit = useCallback(async (engine: Engine) => {
-        console.log(engine);
+        //console.log(engine);
         await loadSlim(engine);
         //await loadFull(engine);
     }, []);
 
     const particlesLoaded = useCallback(async (container: Container | undefined) => {
-        await console.log(container);
+         // console.log(container);
     }, []);
 
     return (
