@@ -35,15 +35,34 @@ export default function MainPage(){
         } setTotalValue(sum)
     }, [stocks])
 
-    const getStocks = useCallback (() => {
-        getAllStocks(token)
-            .then(response => setStocks(response))
-            .catch(e => setError(e.message))
-    },[token])
-
     useEffect(() => {
-        getStocks()
-    }, [getStocks, token])
+        let isMounted = true;
+
+        const fetchData = async () => {
+            try{
+                const response = await getAllStocks(token)
+                if (isMounted) {
+                    setStocks(response)
+                }
+            } catch (e: unknown) {
+                if (isMounted) {
+                    if (e instanceof Error) {
+                        setError(e.message)
+                    } else {
+                        setError('An unknown error occurred.')
+                    }
+                }
+            }
+        };
+
+        fetchData().finally(() => {
+          isMounted = false;
+        })
+
+        return () => {
+            isMounted = false;
+        };
+    }, [token]);
 
     useEffect(() => {
         total()
@@ -56,12 +75,12 @@ export default function MainPage(){
         <div className={'mainPage'}>
             <NavBar/>
             <Header/>
-            <SearchBar onAddStock={getStocks} />
+            <SearchBar onAddStock={getAllStocks} />
             <h2>{error}</h2>
             <div className={"depotList-banner"} >
             </div>
             <div className={"flex-container"}>
-            <div style={{order: 1}} className={"stockList-container"}> <StockList  allStocks={stocks} updateStock={getStocks}/></div>
+            <div style={{order: 1}} className={"stockList-container"}> <StockList  allStocks={stocks} updateStock={getAllStocks}/></div>
             <div style={{order: 2}} className={"pieChart-container"}> <PieChart names={name} price={price} totalValue={totalValue}/></div>
             </div>
             <Footer/>

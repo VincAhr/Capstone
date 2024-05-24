@@ -27,7 +27,7 @@ public class StockService {
     private final StockRepository stockRepository;
 
 
-    public StockDTO searchStock(String searchInput) {
+    public StockDTO searchStock(String searchInput) throws Exception {
 
         final String SEARCH_STOCK = "http://api.marketstack.com/v1/tickers?access_key=" + pw + "&search=" + searchInput + "&limit=1";
 
@@ -64,8 +64,7 @@ public class StockService {
             } else  { return null;
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+            throw new Exception(e);
         }
     }
 

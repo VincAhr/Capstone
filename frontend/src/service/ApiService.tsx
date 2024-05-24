@@ -49,7 +49,7 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw new Error(ApiNotResponding)
+                throw new Error(response.statusText + " " + response.status.toString())
             }
         })
 }
