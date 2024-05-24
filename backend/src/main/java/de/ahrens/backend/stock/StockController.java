@@ -1,10 +1,7 @@
 package de.ahrens.backend.stock;
 
-
-
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -17,7 +14,7 @@ public class StockController {
 
 
     @GetMapping("/api/{symbol}")
-    public StockDTO getStockFromApi(@PathVariable String symbol) {
+    public StockDTO getStockFromApi(@PathVariable String symbol) throws Exception {
         return stockservice.searchStock(symbol);
     }
 

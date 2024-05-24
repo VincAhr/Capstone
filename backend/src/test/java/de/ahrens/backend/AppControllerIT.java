@@ -37,7 +37,7 @@ public class AppControllerIT {
         final Stock stock = new Stock("1", "AAPL", "Apple", "user", "1", "2", eod);
 
         // register user
-        assertThat(restTemplate.postForEntity("/api/user", registerUser, UserModel.class).getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(restTemplate.postForEntity("/api/user/register", registerUser, UserModel.class).getStatusCode()).isEqualTo(HttpStatus.OK);
 
         // login user
         ResponseEntity<Token> tokenResponseEntity = restTemplate.postForEntity("/api/user/login", loginUser, Token.class);
@@ -49,7 +49,7 @@ public class AppControllerIT {
         String token = tokenResponseEntity.getBody().getToken();
 
         //WHEN
-        ResponseEntity<Stock> actualResponse = restTemplate.exchange("/api/stock",
+        ResponseEntity<Stock> actualResponse = restTemplate.exchange("/stock",
                 HttpMethod.POST,
                 new HttpEntity<>(stock, createHeaders(token)), Stock.class);
 

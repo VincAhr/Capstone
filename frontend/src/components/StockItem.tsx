@@ -11,7 +11,7 @@ import deleteIcon from "../pictures/deleteIcon.png"
 
 interface  StockItemProps {
     stock: Stock
-    getAllStocks: () => void
+    getAllStocks: (token: string) => void
 }
 
 export default function StockItem (props: StockItemProps) {
@@ -24,11 +24,13 @@ export default function StockItem (props: StockItemProps) {
     const [error, setError] = useState("")
     const [price, setPrice] = useState("")
     const [newDate, setNewDate] = useState("")
-    const [newValueToDate, setNewValueToDate] = useState("")
+    const [valueToDate, setValueToDate] = useState((parseFloat(props.stock.close) * parseFloat(props.stock.shares)).toFixed(2))
+
 
     useEffect(() => {
         setEditMode(false)
         setEditMode2(false)
+        setError("")
     }, [price, newDate]);
 
 
@@ -43,7 +45,7 @@ export default function StockItem (props: StockItemProps) {
                 shares: share,
                 purchase: stock.purchase
             }, token)
-            .then(() => props.getAllStocks())
+            .then(() => props.getAllStocks(token))
             setShare("")
             setEditMode(false)
             setError("")
@@ -68,7 +70,7 @@ export default function StockItem (props: StockItemProps) {
                 shares: stock.shares,
                 purchase: purchaseValue
             }, token)
-                .then(() => props.getAllStocks())
+                .then(() => props.getAllStocks(token))
             setPurchaseValue("")
             setEditMode2(false)
             setError("")
@@ -86,30 +88,35 @@ export default function StockItem (props: StockItemProps) {
     }
 
     const RefreshDataStock = async (stock: Stock) => {
-        const stockData = await searchStock(props.stock.symbol, token);
+        try{
+            const stockData = await searchStock(props.stock.symbol, token);
 
-        if (stockData.close && stockData.date) {
-            const updatedStock = {
-                id: stock.id,
-                symbol: stock.symbol,
-                name: stockData.name,
-                close: stockData.close.toString(),
-                date: stockData.date.toString(),
-                shares: stock.shares,
-                purchase: stock.purchase,
-            };
-            await updateStock(updatedStock, token);
-            await getStock(updatedStock.id, token);
-            setNewDate(stockData.date.toString());
-            setPrice(stockData.close.toString());
-            setNewValueToDate((parseFloat(stockData.close.toString()) * parseFloat(stock.shares)).toFixed(2));
+            if (stockData.close && stockData.date) {
+                const updatedStock = {
+                    id: stock.id,
+                    symbol: stock.symbol,
+                    name: stockData.name,
+                    close: stockData.close.toString(),
+                    date: stockData.date.toString(),
+                    shares: stock.shares,
+                    purchase: stock.purchase,
+                };
+                await updateStock(updatedStock, token);
+                await getStock(updatedStock.id, token);
+                setNewDate(stockData.date.toString());
+                setPrice(stockData.close.toString());
+                setValueToDate(product(stockData.close.toString(), stock.shares.toString()));
+                profit(stockData.purchase, stockData.close, stockData.shares)
+            }
+        } catch (e: any) {
+            setError(e.message)
         }
     }
 
 
     const deleteFunction = (stock: Stock) => {
         deleteStock(stock.id, token)
-            .then( () => {props.getAllStocks()})
+            .then( () => {props.getAllStocks(token)})
     }
 
     const product = (price : string, quantity : string) => {
@@ -154,8 +161,7 @@ export default function StockItem (props: StockItemProps) {
                         </div> : null
                     }
                 </p>
-                {newValueToDate.length > 1 ? <p>Value to date: {newValueToDate}</p>
-                    : <p>{product(props.stock.close, props.stock.shares)}$</p>}
+                <p>Value to date: {valueToDate}$</p>
                 <p>Value of purchase: {props.stock.purchase}$
                     <img src={(edit)} alt={"edit"} className={"edit"} title="edit" onClick={() => setEditMode2(true)}/>
                     {editMode2 ?
@@ -172,7 +178,10 @@ export default function StockItem (props: StockItemProps) {
                     <p>Profit: {profit(props.stock.purchase, props.stock.close, props.stock.shares)}$</p>
                     : null
                 }
-                <p>{error}</p>
+                {error ?
+                    <p className={"error"}>{error}</p>
+                    : null
+                }
             </h4>
         </div>
     )

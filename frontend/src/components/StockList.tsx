@@ -5,7 +5,7 @@ import "./StockList.css"
 
 interface StockListProps {
     allStocks: Array<Stock>
-    updateStock: () => void
+    updateStock: (token: string) => void
 }
 
 export default function StockList(props: StockListProps) {

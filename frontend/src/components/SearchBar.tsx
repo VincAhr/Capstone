@@ -4,7 +4,7 @@ import {useAuth} from "../auth/AuthProvider";
 import "./SearchBar.css"
 
 interface SearchBarProps {
-    onAddStock: () => void;
+    onAddStock: (token: string) => void
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -49,7 +49,7 @@ export default function SearchBar(props: SearchBarProps) {
                     setShares("")
                     setError("")
                 })
-                .then(() => props.onAddStock())
+                .then(() => props.onAddStock(token))
         else setError("Not possible with empty symbol, price, date or share.")
     }
 

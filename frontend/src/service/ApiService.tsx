@@ -1,8 +1,6 @@
 import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
-const ApiNotResponding: string = "Server is not responding";
-
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
     return fetch(`/api/user/register`, {
         method: 'POST',
@@ -49,7 +47,7 @@ export const searchStock = (symbol: string, token: string) => {
             if (response.ok) {
                 return response.json()
             } else {
-                throw new Error(ApiNotResponding)
+                throw new Error(response.statusText + " " + response.status.toString())
             }
         })
 }
