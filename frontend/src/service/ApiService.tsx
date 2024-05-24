@@ -1,8 +1,6 @@
 import {LoginData, RegisterData} from "../model/UserModel";
 import {Stock} from "../model/StockModel";
 
-const ApiNotResponding: string = "Server is not responding";
-
 export const registerNewUser = ({username, password, passwordAgain}: RegisterData) => {
     return fetch(`/api/user/register`, {
         method: 'POST',
